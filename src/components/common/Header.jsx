@@ -6,7 +6,7 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 h-20 bg-gray-800 z-[1000]">
       <div className="max-w-7xl mx-auto h-full flex justify-between items-center px-8">
         <h1 className="text-[25px] font-bold text-[#fcfcfc]">
-          Explore Shanthi Nagar
+          Explore Shanti Nagar
         </h1>
         <nav className="flex items-center gap-12">
             <Link 

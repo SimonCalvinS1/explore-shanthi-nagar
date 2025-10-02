@@ -30,7 +30,7 @@ const Recommendations = () => {
 
     return (
         <div className="w-full py-20">
-            <h1 className="text-3xl font-bold mb-8">Explore Around Shanthi Nagar</h1>
+            <h1 className="text-3xl font-bold mb-8">Explore Around Shanti Nagar</h1>
             <div className="space-y-8">
                 {recommendations.map((category) => (
                     <div key={category.id} className="bg-white rounded-lg shadow-lg p-6">
