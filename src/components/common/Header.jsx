@@ -28,10 +28,10 @@ function Header() {
                 Contact
             </Link>
             <Link 
-                to="/recommendations" 
+                to="/places-to-visit" 
                 className="text-[#fcfcfc] text-lg font-medium hover:text-[#fcfc00] transition-colors duration-200"
             >
-                Recommendations
+                Places to Visit
             </Link>
         </nav>
       </div>

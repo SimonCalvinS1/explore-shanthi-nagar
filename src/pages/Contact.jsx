@@ -3,7 +3,7 @@ import React from 'react';
 const Contact = () => {
     return (
         <div className="py-20 w-full max-w-2xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6">Contact Us</h1>
+            <h1 className="text-3xl text-center font-bold mb-6">Contact Us</h1>
             <p className="mb-4">If you have any questions or inquiries, feel free to reach out to us!</p>
             <form className="space-y-6">
                 <div>
@@ -34,7 +34,7 @@ const Contact = () => {
                     ></textarea>
                 </div>
                 <button 
-                    className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
+                    className="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
                     type="submit"
                 >
                     Send Message
