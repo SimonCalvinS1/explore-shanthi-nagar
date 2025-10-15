@@ -20,7 +20,7 @@ const Home = () => {
         {
             url: "https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg",
             title: "Lalbagh Botanical Garden",
-            description: "A historic garden with diverse plant species and beautiful landscapes"
+            description: "A historic garden with diverse plant species"
         },
         {
             url: "https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg",
@@ -37,11 +37,43 @@ const Home = () => {
     return (
         <div className="py-20 flex flex-col justify-center items-center">
             <div className="w-full max-w-5xl text-center">
-                <h1 className="text-3xl font-bold mb-6">Explore Shanthi Nagar with Ease!</h1>
+                <h1 className="text-3xl font-bold mb-8">Explore Shanthi Nagar with Ease!</h1>
+                
                 <p className="text-xl mb-6">
                     <span className="font-semibold">Welcome to your comprehensive guide</span> to discover the best of Shanthi Nagar and nearby areas in Bengaluru. 
-                    Whether you're new to the area or a long-time resident, you'll find recommendations for must-visit spots in nearby neighborhoods like <span className="font-semibold">Wilson Garden</span>, <span className="font-semibold">Hosur Road</span>, <span className="font-semibold">Double Road</span>, and more. 
                 </p>
+
+                <p className="text-xl mb-6">
+                    Whether you're new to the area or a long-time resident, you'll find recommendations for must-visit spots in nearby neighborhoods like <span className="font-semibold">Wilson Garden</span>, <span className="font-semibold">Hosur Road</span>, <span className="font-semibold">Double Road</span>, and more. 
+                    By making it simple to locate hidden gems and local treasures, we hope to assist you in discovering, appreciating, and connecting with Bengaluru's heart.
+                    You'll find suggestions for must-see locations in surrounding communities including <span className="font-semibold">Wilson Garden</span>, <span className="font-semibold">Hosur Road</span>, <span className="font-semibold">Double Road</span>, and more, regardless of how long you've lived there.
+                </p>
+
+                <p className="text-xl mb-6">
+                    <span className="font-semibold">Explore Shanti Nagar Now</span> is a website designed to help people discover the best of Shanthi Nagar and nearby areas in Bengaluru. 
+                    We recommend you several good-to-visit spots in Shanti Nagar and nearby areas, be it travel for fun, to enjoy, or to explore this area and nearby places with just a few clicks!
+                    We make it easy to explore and discover places in and around Shanti Nagar and will help you in exploring and connecting with Shanti Nagar in an easy manner.
+                    Discover the best places, eateries, parks, and local experiences in Shanthi Nagar and its vibrant surroundings in Bengaluru, India.
+                </p>
+
+                <p className="text-2xl mb-5 text-pink-600 font-bold">Have fun exploring!</p>
+
+                <h1 className="text-2xl mb-3 font-semibold">Top Spots to Visit</h1>
+                {/* Featured Places Carousel */}
+                <div className="w-[500px] h-[400px] mb-12 mx-auto">
+                    <Slider {...carouselSettings}>
+                        {placeHighlights.map((place, index) => (
+                            <div key={index} className="px-2">
+                                <ServiceCard 
+                                    title={place.title}
+                                    description={place.description}
+                                    image={place.url}
+                                />
+                            </div>
+                        ))}
+                    </Slider>
+                </div>
+                <p className="mb-5 text-sm text-gray-600">&copy; Images are subject to copyright.</p>
 
                 <div className="flex flex-col items-center justify-center mb-4">
                     <div className="max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-6">
@@ -73,24 +105,6 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* Featured Places Carousel */}
-                <h2 className="text-2xl font-bold mb-6">Featured Places to Visit</h2>
-                <div className="w-[600px] h-[400px] mb-12 mx-auto">
-                    <Slider {...carouselSettings}>
-                        {placeHighlights.map((place, index) => (
-                            <div key={index} className="px-2">
-                                <ServiceCard 
-                                    title={place.title}
-                                    description={place.description}
-                                    image={place.url}
-                                />
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
-
-                <p className="mb-5 text-sm text-gray-600">&copy; Images are subject to copyright.</p>
             </div>
         </div>
     );
