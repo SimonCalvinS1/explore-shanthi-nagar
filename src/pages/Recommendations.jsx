@@ -79,6 +79,7 @@ const Recommendations = () => {
                     </div>
                 ))}
             </div>
+            <p className="text-center text-2xl font-semibold text-pink-800 mb-6 mt-7">Happy Exploring!</p>
         </div>
     );
 };

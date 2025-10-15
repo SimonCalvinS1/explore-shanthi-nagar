@@ -5,13 +5,16 @@ export default function About() {
         <div className="py-20 container mx-auto p-4 max-w-5xl">
             <h1 className="text-3xl text-center font-bold mb-6">About This Guide</h1>
             <div className="text-xl mb-8 flex flex-col md:flex-row items-center gap-8">
-                <img
-                    src="https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg"
-                    alt="Lalbagh Botanical Garden"
-                    className="w-full md:w-1/3 rounded-lg shadow-md"
-                />
                 <div>
-                    <p className="mb-4">
+                    <img
+                        src="https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg"
+                        alt="Lalbagh Botanical Garden"
+                        className="w-full rounded-lg shadow-md"
+                    />
+                    <p className="text-sm text-center mt-3 mb-5">&copy; Images are subject to copyright.</p>
+                </div>
+                <div>
+                    <p className="mb-6">
                         <span className="font-semibold text-blue-700">Explore Shanthi Nagar</span> is your friendly guide to discovering the best places, eateries, parks, and local experiences in Shanthi Nagar and its vibrant surroundings in Bengaluru, India.
                     </p>
                     <p className="mb-2">
@@ -35,8 +38,6 @@ export default function About() {
                     <li>Tips for getting around and exploring nearby places</li>
                 </ul>
             </div>
-
-            <p className="text-center mt-10 mb-5">&copy; Images are subject to copyright.</p>
         </div>
     );
 }
