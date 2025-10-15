@@ -7,10 +7,10 @@ const Recommendations = () => {
             category: "Food & Dining",
             places: [
                 { name: "MTR Restaurant", description: "Famous South Indian restaurant known for its dosas and filter coffee", location: "Lalbagh Road" },
-                { name: "Victoria Restaurant", description: "Local favorite for North Indian and Chinese cuisine", location: "Double Road" },
-                { name: "Victoria Restaurant", description: "Local favorite for North Indian and Chinese cuisine", location: "Double Road" },
-                { name: "Victoria Restaurant", description: "Local favorite for North Indian and Chinese cuisine", location: "Double Road" },
-                { name: "Victoria Restaurant", description: "Local favorite for North Indian and Chinese cuisine", location: "Double Road" },
+                { name: "Victoria Restaurant", description: "Local favorite for North Indian and Chinese cuisine", location: "Double Road (a.k.a Kengal Hanumanthaiah Road), Shanti Nagar" },
+                { name: "Victoria Restaurant", description: "Local favorite for North Indian and Chinese cuisine", location: "Double Road (a.k.a Kengal Hanumanthaiah Road), Shanti Nagar" },
+                { name: "Victoria Restaurant", description: "Local favorite for North Indian and Chinese cuisine", location: "Double Road (a.k.a Kengal Hanumanthaiah Road), Shanti Nagar" },
+                { name: "Victoria Restaurant", description: "Local favorite for North Indian and Chinese cuisine", location: "Double Road (a.k.a Kengal Hanumanthaiah Road), Shanti Nagar" },
             ]
         },
         {
@@ -72,7 +72,7 @@ const Recommendations = () => {
                                 <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
                                     <h3 className="text-xl font-medium mb-2">{place.name}</h3>
                                     <p className="text-gray-600 mb-2">{place.description}</p>
-                                    <p className="text-sm text-blue-500">📍 {place.location}</p>
+                                    <p className="text-m text-green-800">📍 {place.location}</p>
                                 </div>
                             ))}
                         </div>
