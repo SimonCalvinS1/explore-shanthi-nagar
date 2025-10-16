@@ -9,7 +9,7 @@ export default function About() {
                     <img
                         src="https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg"
                         alt="Lalbagh Botanical Garden"
-                        className="w-full rounded-lg shadow-md"
+                        className="w-200 h-45 rounded-lg"
                     />
                     <p className="text-sm text-center mt-3 mb-5">&copy; Images are subject to copyright.</p>
                 </div>
@@ -23,13 +23,13 @@ export default function About() {
                 </div>
             </div>
 
-            <div className="text-xl mb-8 flex flex-col md:flex-row items-center gap-6">
+            <div className="text-xl mb-4 flex flex-col md:flex-row gap-6">
                 <p>
                     Our goal is to help you explore, enjoy, and connect with the heart of Bengaluru by making it easy to find local gems and hidden treasures. In this website, you can find some places to roam around Shanti Nagar like: 
                 </p>
             </div>
 
-            <div className="text-xl mb-8 flex flex-col md:flex-row items-center gap-6">
+            <div className="text-xl mb-8 flex flex-col md:flex-row gap-6">
                 <ul className="list-disc list-inside mb-2">
                     <li>Local food joints and restaurants</li>
                     <li>Parks and recreational spaces</li>
@@ -37,6 +37,25 @@ export default function About() {
                     <li>Historic and cultural landmarks</li>
                     <li>Tips for getting around and exploring nearby places</li>
                 </ul>
+            </div>
+
+            <div className="text-xl mb-8 flex flex-col md:flex-row items-center gap-8">
+                <div>
+                    <p>
+                        This guide is created by a local enthusiast who loves Bengaluru and wants to share easy, practical recommendations for exploring Shanthi Nagar and nearby neighborhoods. We prioritize authentic local experiences, pocket-friendly options, and hidden gems.
+                    </p>
+                    <p>
+                        We regularly update listings and tips based on community feedback. If you have a favorite spot or a suggestion, we'd love to hear from you. 
+                    </p>
+                </div>
+                <div>
+                    <img
+                        src="https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg"
+                        alt="Lalbagh Botanical Garden"
+                        className="w-200 h-45 rounded-lg"
+                    />
+                    <p className="text-sm text-center mt-3 mb-5">&copy; Images are subject to copyright.</p>
+                </div>
             </div>
         </div>
     );

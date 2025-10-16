@@ -39,14 +39,14 @@ const Home = () => {
             <div className="w-full max-w-5xl text-center">
                 <h1 className="text-3xl font-bold mb-8">Explore Shanthi Nagar with Ease!</h1>
                 
-                <p className="text-xl mb-6">
-                    <span className="font-semibold">Welcome to your comprehensive guide</span> to discover the best of Shanthi Nagar and nearby areas in Bengaluru. 
+                <p className="text-2xl mb-6">
+                    <span className="font-semibold">Welcome to your comprehensive guide</span> to discover the best of Shanthi Nagar. 
                 </p>
 
                 <p className="text-xl mb-6">
                     Whether you're new to the area or a long-time resident, you'll find recommendations for must-visit spots in nearby neighborhoods like <span className="font-semibold">Wilson Garden</span>, <span className="font-semibold">Hosur Road</span>, <span className="font-semibold">Double Road</span>, and more. 
                     By making it simple to locate hidden gems and local treasures, we hope to assist you in discovering, appreciating, and connecting with Bengaluru's heart.
-                    You'll find suggestions for must-see locations in surrounding communities including <span className="font-semibold">Wilson Garden</span>, <span className="font-semibold">Hosur Road</span>, <span className="font-semibold">Double Road</span>, and more, regardless of how long you've lived there.
+                    You'll find suggestions for must-see locations in surrounding communities including Wilson Garden, Hosur Road, Double Road, and more, regardless of how long you've lived there.
                 </p>
 
                 <p className="text-xl mb-6">
@@ -56,9 +56,9 @@ const Home = () => {
                     Discover the best places, eateries, parks, and local experiences in Shanthi Nagar and its vibrant surroundings in Bengaluru, India.
                 </p>
 
-                <p className="text-2xl mb-5 text-pink-600 font-bold">Have fun exploring!</p>
-
-                <h1 className="text-2xl mb-3 font-semibold">Top Spots to Visit</h1>
+                <p className="text-2xl mb-8 text-pink-600 font-bold">Have fun exploring!</p>
+                
+                <h1 className="text-2xl mt-6 mb-8 font-semibold">Top Spots to Visit</h1>
                 {/* Featured Places Carousel */}
                 <div className="w-[500px] h-[400px] mb-12 mx-auto">
                     <Slider {...carouselSettings}>
@@ -90,21 +90,27 @@ const Home = () => {
                             <p className="text-white">Find everything from traditional markets to modern shopping centers.</p>
                         </div>
                     </div>
-                    <div className="max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-10">
+                    <div className="max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-5">
                         <div className="p-6 bg-green-400 rounded-lg shadow-md">
                             <h3 className="text-white text-xl font-bold mb-2">Parks and Recreation</h3>
-                            <p className="text-white">Experience the authentic flavors of Karnataka at local restaurants.</p>
+                            <p className="text-white">Experience the nature vibes nearby Shanti Nagar.</p>
                         </div>
                         <div className="p-6 bg-pink-400 rounded-lg shadow-md">
                             <h3 className="text-white text-xl font-bold mb-2">Explore Shanti Nagar</h3>
-                            <p className="text-white">Explore and explore many places in and around Shanti Nagar.</p>
+                            <p className="text-white">Explore many places in and around Shanti Nagar.</p>
                         </div>
-                        <div className="p-6 bg-red-500 rounded-lg shadow-md">
+                        <div className="p-6 bg-red-400 rounded-lg shadow-md">
                             <h3 className="text-white text-xl font-bold mb-2">Food Joints</h3>
                             <p className="text-white">Experience the authentic food flavors of Karnataka at local restaurants.</p>
                         </div>
                     </div>
                 </div>
+
+                <p className="text-xl">
+                    Thank you for visiting our website. This guide is created by a local enthusiast who loves Bengaluru and wants to share easy, practical recommendations for exploring Shanthi Nagar and nearby neighborhoods. We prioritize authentic local experiences, pocket-friendly options, and hidden gems.
+                    We hope you find it helpful in exploring and enjoying all that Shanthi Nagar and its surroundings have to offer.
+                    If you have any suggestions or feedback, please feel free to <Link to="/contact" className="text-blue-600 underline">contact us</Link>.
+                </p>
             </div>
         </div>
     );
