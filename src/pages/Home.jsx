@@ -13,7 +13,19 @@ const Home = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2000
+        autoplaySpeed: 2000,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    arrows: false,
+                    dots: true
+                }
+            }
+        ],
+        className: "center",
+        centerMode: false,
+        centerPadding: "0px"
     };
 
     const placeHighlights = [
@@ -69,11 +81,11 @@ const Home = () => {
                 <p className="text-2xl mb-8 text-pink-600 font-bold">Have fun exploring!</p>
                 
                 <h1 className="text-2xl mt-6 mb-8 font-semibold">Top Spots to Visit</h1>
-                {/* Featured Places Carousel */}
-                <div className="w-[500px] h-[400px] mb-15 mx-auto">
+                {/* Update carousel container */}
+                <div className="w-full max-w-[600px] mx-auto mb-12"> {/* Updated width and margin */}
                     <Slider {...carouselSettings}>
                         {placeHighlights.map((place, index) => (
-                            <div key={index} className="px-2">
+                            <div key={index}>
                                 <ServiceCard 
                                     title={place.title}
                                     description={place.description}
@@ -84,35 +96,38 @@ const Home = () => {
                     </Slider>
                 </div>
                 <p className="mb-6 text-sm text-gray-600">&copy; Images are subject to copyright.</p>
-                
-                <p className="text-xl mb-4 font-semibold">Find by Categories:</p>
-                <div className="flex flex-col items-center justify-center mb-4">
-                    <div className="max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-6">
-                        <div className="p-6 bg-lime-500 rounded-lg shadow-md">
-                            <h3 className="text-white text-xl font-bold mb-2">School Institutions</h3>
-                            <p className="text-white">Discover university and educational institutions nearby Shanti Nagar.</p>
+
+                <p className="text-xl mb-4 font-semibold px-4 md:px-0">Find by Categories:</p>
+                <div className="flex flex-col items-center justify-center mb-4 px-4 md:px-8 w-full">
+                    {/* First row */}
+                    <div className="w-full max-w-4xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-left mb-4 md:mb-6">
+                        <div className="p-4 md:p-6 bg-lime-500 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                            <h3 className="text-white text-lg md:text-xl font-bold mb-2">School Institutions</h3>
+                            <p className="text-white text-sm md:text-base">Discover university and educational institutions nearby Shanti Nagar.</p>
                         </div>
-                        <div className="p-6 bg-blue-500 rounded-lg shadow-md">
-                            <h3 className="text-white text-xl font-bold mb-2">Transportation</h3>
-                            <p className="text-white">Explore travelling options and places in and around Shanti Nagar.</p>
+                        <div className="p-4 md:p-6 bg-blue-500 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                            <h3 className="text-white text-lg md:text-xl font-bold mb-2">Transportation</h3>
+                            <p className="text-white text-sm md:text-base">Explore travelling options and places in and around Shanti Nagar.</p>
                         </div>
-                        <div className="p-6 bg-orange-500 rounded-lg shadow-md">
-                            <h3 className="text-white text-xl font-bold mb-2">Shopping Districts</h3>
-                            <p className="text-white">Find everything from traditional markets to modern shopping centers.</p>
+                        <div className="p-4 md:p-6 bg-orange-500 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                            <h3 className="text-white text-lg md:text-xl font-bold mb-2">Shopping Districts</h3>
+                            <p className="text-white text-sm md:text-base">Find everything from traditional markets to modern shopping centers.</p>
                         </div>
                     </div>
-                    <div className="max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-5">
-                        <div className="p-6 bg-teal-500 rounded-lg shadow-md">
-                            <h3 className="text-white text-xl font-bold mb-2">Parks and Recreation</h3>
-                            <p className="text-white">Experience the nature vibes nearby Shanti Nagar.</p>
+
+                    {/* Second row */}
+                    <div className="w-full max-w-4xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-left mb-5">
+                        <div className="p-4 md:p-6 bg-teal-500 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                            <h3 className="text-white text-lg md:text-xl font-bold mb-2">Parks and Recreation</h3>
+                            <p className="text-white text-sm md:text-base">Experience the nature vibes nearby Shanti Nagar.</p>
                         </div>
-                        <div className="p-6 bg-red-500 rounded-lg shadow-md">
-                            <h3 className="text-white text-xl font-bold mb-2">Explore Shanti Nagar</h3>
-                            <p className="text-white">Explore many places in and around Shanti Nagar.</p>
+                        <div className="p-4 md:p-6 bg-red-500 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                            <h3 className="text-white text-lg md:text-xl font-bold mb-2">Explore Shanti Nagar</h3>
+                            <p className="text-white text-sm md:text-base">Explore many places in and around Shanti Nagar.</p>
                         </div>
-                        <div className="p-6 bg-cyan-500 rounded-lg shadow-md">
-                            <h3 className="text-white text-xl font-bold mb-2">Food Joints</h3>
-                            <p className="text-white">Experience the authentic food flavors of Karnataka at local restaurants.</p>
+                        <div className="p-4 md:p-6 bg-cyan-500 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                            <h3 className="text-white text-lg md:text-xl font-bold mb-2">Food Joints</h3>
+                            <p className="text-white text-sm md:text-base">Experience the authentic food flavors of Karnataka at local restaurants.</p>
                         </div>
                     </div>
                 </div>
