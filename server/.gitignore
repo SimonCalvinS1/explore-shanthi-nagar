@@ -1,0 +1,21 @@
+# Environment variables
+.env
+.env.*
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# Coverage directory
+coverage/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+#node modules
+node_modules
