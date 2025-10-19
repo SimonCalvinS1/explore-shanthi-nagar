@@ -1,5 +1,7 @@
 import React from "react";
 
+//fetch data from database
+
 const Recommendations = () => {
   const recommendations = [
     {
