@@ -23,8 +23,8 @@ router.post(
   [
     body("name")
       .trim()
-      .isLength({ min: 2 })
-      .withMessage("Name must be at least 2 characters long"),
+      .isLength({ min: 1 })
+      .withMessage("Name must be at least 1 character long"),
     body("email").isEmail().withMessage("Please enter a valid email"),
     body("message")
       .trim()

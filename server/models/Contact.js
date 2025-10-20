@@ -6,7 +6,7 @@ const contactSchema = new mongoose.Schema(
       type: String,
       required: [true, "Name is required"],
       trim: true,
-      minlength: [2, "Name must be at least 2 characters long"],
+      minlength: [1, "Name must be at least 1 characters long"],
       maxlength: [100, "Name cannot exceed 100 characters"]
     },
     email: {
@@ -23,7 +23,7 @@ const contactSchema = new mongoose.Schema(
       type: String,
       required: [true, "Message is required"],
       trim: true,
-      minlength: [5, "Message should be at least 5 characters long"],
+      minlength: [1, "Message should be at least 1 character long"],
       maxlength: [1000, "Message cannot exceed 1000 characters"]
     }
   },

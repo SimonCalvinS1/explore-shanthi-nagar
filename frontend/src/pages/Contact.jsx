@@ -19,7 +19,7 @@ const Contact = () => {
             }
         } catch (error) {
             console.error(error);
-            setStatus(" >< Server error. Please try later.");
+            setStatus(" Some error occured. Please try later.");
         }
     };
 
