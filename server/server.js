@@ -19,11 +19,11 @@ import carouselRoutes from './routes/carousel.js';
 dotenv.config();
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
-const ALLOWED_ORIGIN = process.env.CORS_ORIGIN || '*'; // Change * to your React URL in production
+const ALLOWED_ORIGIN = process.env.CORS_ORIGIN;
 
-// ========== 🔧 Middleware Setup ==========
+// Middleware Setup
 
 // Set secure HTTP headers
 app.use(helmet());
@@ -58,15 +58,15 @@ app.use((req, res, next) => {
     next();
 });
 
-// ========== 🗄️ Database Connection ==========
+// Database Connection
 mongoose.connect(MONGODB_URI)
     .then(() => {
-        console.log('✅ Connected to MongoDB');
-        console.log('📊 Database:', mongoose.connection.name);
+        console.log(' ~ Connected to MongoDB');
+        console.log('Database:', mongoose.connection.name);
     })
-    .catch(err => console.error('❌ MongoDB connection error:', err));
+    .catch(err => console.error(' >< MongoDB connection error:', err));
 
-// ========== 🌐 Routes ==========
+// Routes
 app.use(foodAndDiningRoutes);
 app.use(shoppingRoutes);
 app.use(parksRoutes);
@@ -74,7 +74,7 @@ app.use(universitiesRoutes);
 app.use(transportationRoutes);
 app.use(carouselRoutes);
 
-// ========== 🧠 Health & Debug Endpoints ==========
+// Health & Debug Endpoints
 app.get('/api/health', (req, res) => {
     res.json({
         status: 'ok',
@@ -99,7 +99,7 @@ app.get('/api/test-collections', async (req, res) => {
     }
 });
 
-// ========== ❌ 404 Handler ==========
+// 404 Handler
 app.use((req, res) => {
     res.status(404).json({
         error: 'Route not found',
@@ -108,9 +108,9 @@ app.use((req, res) => {
     });
 });
 
-// ========== 🚀 Start Server ==========
+// Start Server
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-    console.log(`📍 CORS Origin: ${ALLOWED_ORIGIN}`);
-    console.log(`📍 Routes available under /api`);
+    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`CORS Origin: ${ALLOWED_ORIGIN}`);
+    console.log(`Routes available under /api`);
 });

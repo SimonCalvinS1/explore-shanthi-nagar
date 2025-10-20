@@ -1,5 +1,5 @@
 // frontend/src/services/api.js
-const API_URL = import.meta.env.VITE_API_URL //|| 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL;
 
 // Generic fetch helper with error handling
 const fetchAPI = async (endpoint, options = {}) => {
