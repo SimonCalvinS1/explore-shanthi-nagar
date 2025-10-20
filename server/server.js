@@ -85,7 +85,7 @@ app.use('/', parksRoutes);
 app.use('/', universitiesRoutes);
 app.use('/', transportationRoutes);
 app.use('/', carouselRoutes);
-app.use('/api', contactRoutes);
+app.use('/', contactRoutes);
 
 // Health & Debug Endpoints
 app.get('/api/health', (req, res) => {
@@ -123,7 +123,7 @@ app.use((req, res) => {
 
 // Start Server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on ${PORT}`);
     console.log(`CORS Origin: ${ALLOWED_ORIGIN}`);
     console.log(`Routes available under /api`);
 });

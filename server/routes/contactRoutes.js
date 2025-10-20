@@ -18,7 +18,7 @@ const contactLimiter = rateLimit({
 
 // POST route — Secure Contact Form
 router.post(
-  "/contact",
+  "/api/contact",
   contactLimiter,
   [
     body("name")
@@ -47,10 +47,10 @@ router.post(
 
       res.status(201).json({
         success: true,
-        message: "Message sent successfully"
+        message: " ~ Message sent successfully"
       });
     } catch (error) {
-      console.error("❌ Contact form error:", error);
+      console.error(">< Contact form error:", error);
       res.status(500).json({
         success: false,
         message: "Server error while sending message"
