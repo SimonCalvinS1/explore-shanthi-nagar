@@ -15,6 +15,34 @@ const fetchAPI = async (endpoint, options = {}) => {
     }
 };
 
+// Carousel API
+export const carouselAPI = {
+    getAll: () => fetchAPI('/api/carousel'),
+    getById: (id) => fetchAPI(`/api/carousel/${id}`),
+    create: (data) => fetchAPI('/api/carousel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+};
+
+// 📨 Contact API
+export const contactAPI = {
+    sendMessage: (data) =>
+        fetchAPI('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }),
+
+    getAllMessages: () => fetchAPI('/api/contact'), // Optional — for admin dashboard
+
+    deleteMessage: (id) =>
+        fetchAPI(`/api/contact/${id}`, {
+            method: 'DELETE'
+        })
+};
+
 // Food & Dining API
 export const foodAndDiningAPI = {
     getAll: () => fetchAPI('/api/food'),

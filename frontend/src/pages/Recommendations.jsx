@@ -14,12 +14,12 @@ const Recommendations = () => {
     try {
       setLoading(true);
       setError(null);
-      console.log('🔄 Fetching recommendations...');
+      console.log('rs: Fetching recommendations...');
       const data = await getAllRecommendations();
-      console.log('✅ Data received:', data);
+      console.log(' ~ Data received:', data);
       setRecommendations(data);
     } catch (err) {
-      console.error("❌ Error loading recommendations:", err);
+      console.error(" >< Error loading recommendations:", err);
       setError(err.message || "Failed to fetch recommendations");
     } finally {
       setLoading(false);

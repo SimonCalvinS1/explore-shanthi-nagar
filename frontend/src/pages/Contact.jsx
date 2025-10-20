@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
+import { contactAPI } from "../components/services/api";
 
 const Contact = () => {
-    const [formData, setState] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
+    const [form, setForm] = useState({ name: "", email: "", message: "" });
+    const [status, setStatus] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add form submission logic here
-        console.log('Form submitted:', formData);
+        setStatus("Sending...");
+
+        try {
+            const res = await contactAPI.sendMessage(form);
+            if (res.success) {
+                setStatus(" ~ Message sent successfully!");
+                setForm({ name: "", email: "", message: "" });
+            } else {
+                setStatus(" ~ Failed to send message. Please try again.");
+            }
+        } catch (error) {
+            console.error(error);
+            setStatus(" >< Server error. Please try later.");
+        }
     };
 
     const handleChange = (e) => {
-        setState({
-            ...formData,
-            [e.target.id]: e.target.value
-        });
+        setForm({ ...form, [e.target.name]: e.target.value });
     };
 
     return (
@@ -35,7 +42,8 @@ const Contact = () => {
                                 className="w-full p-3 border border-gray-300 rounded-lg transition-colors" 
                                 type="text" 
                                 id="name"
-                                value={formData.name}
+                                name="name"
+                                value={form.name}
                                 onChange={handleChange}
                                 required 
                             />
@@ -48,7 +56,8 @@ const Contact = () => {
                                 className="w-full p-3 border border-gray-300 rounded-lg transition-colors" 
                                 type="email" 
                                 id="email"
-                                value={formData.email}
+                                name="email"
+                                value={form.email}
                                 onChange={handleChange}
                                 required 
                             />
@@ -59,9 +68,10 @@ const Contact = () => {
                             </label>
                             <textarea 
                                 className="w-full p-3 border border-gray-300 rounded-lg transition-colors" 
-                                id="message" 
+                                id="message"
+                                name="message"
                                 rows="2"
-                                value={formData.message}
+                                value={form.message}
                                 onChange={handleChange}
                                 required
                             ></textarea>
@@ -72,6 +82,9 @@ const Contact = () => {
                         >
                             Send Message
                         </button>
+                        {status && (
+                            <p className="text-center mt-2">{status}</p>
+                        )}
                     </form>
                 </div>
                 

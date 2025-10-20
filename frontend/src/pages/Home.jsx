@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../index.css'
+import '../index.css';
+import { carouselAPI } from '../components/services/api';
 
 const Home = () => {
     const [carouselItems, setCarouselItems] = useState([]);
@@ -36,11 +37,7 @@ const Home = () => {
         const fetchCarousel = async () => {
             try {
                 setLoading(true);
-                const res = await fetch('http://localhost:5000/api/carousel');
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-                const data = await res.json();
+                const data = await carouselAPI.getAll();
                 setCarouselItems(data);
             } catch (error) {
                 console.error('Error fetching carousel data:', error);
@@ -62,13 +59,13 @@ const Home = () => {
                 {carouselItems.map((item, index) => (
                     <div key={index} className="carousel-slide">
                         <img 
-                            src={item.image} 
+                            src={item.url} 
                             alt={item.title} 
-                            className="w-full h-[400px] object-cover rounded-lg"
+                            className="w-full h-[370px] object-cover rounded-lg"
                         />
                         <div className="carousel-caption">
-                            <h2 className="text-xl font-bold">{item.title}</h2>
-                            <p>{item.description}</p>
+                            <h2 className="text-m text-center font-bold">{item.title}</h2>
+                            <p className="text-sm">{item.description}</p>
                         </div>
                     </div>
                 ))}

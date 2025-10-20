@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 //import mongoSanitize from 'express-mongo-sanitize';
 import morgan from 'morgan';
+import xss from 'xss';
 
 // Import all routes
 import foodAndDiningRoutes from './routes/foodAndDining.js';
@@ -15,6 +16,7 @@ import parksRoutes from './routes/parksAndRecreation.js';
 import universitiesRoutes from './routes/universitiesAndColleges.js';
 import transportationRoutes from './routes/transportation.js';
 import carouselRoutes from './routes/carousel.js';
+import contactRoutes from "./routes/contactRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -23,7 +25,17 @@ const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
 const ALLOWED_ORIGIN = process.env.CORS_ORIGIN;
 
-// Middleware Setup
+// Custom XSS middleware
+app.use((req, res, next) => {
+    if (req.body) {
+        for (let key in req.body) {
+            if (typeof req.body[key] === 'string') {
+                req.body[key] = xss(req.body[key]);
+            }
+        }
+    }
+    next();
+});
 
 // Set secure HTTP headers
 app.use(helmet());
@@ -67,12 +79,13 @@ mongoose.connect(MONGODB_URI)
     .catch(err => console.error(' >< MongoDB connection error:', err));
 
 // Routes
-app.use(foodAndDiningRoutes);
-app.use(shoppingRoutes);
-app.use(parksRoutes);
-app.use(universitiesRoutes);
-app.use(transportationRoutes);
-app.use(carouselRoutes);
+app.use('/', foodAndDiningRoutes);
+app.use('/', shoppingRoutes);
+app.use('/', parksRoutes);
+app.use('/', universitiesRoutes);
+app.use('/', transportationRoutes);
+app.use('/', carouselRoutes);
+app.use('/api', contactRoutes);
 
 // Health & Debug Endpoints
 app.get('/api/health', (req, res) => {
