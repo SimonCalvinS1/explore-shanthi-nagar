@@ -28,8 +28,8 @@ router.post(
     body("email").isEmail().withMessage("Please enter a valid email"),
     body("message")
       .trim()
-      .isLength({ min: 5 })
-      .withMessage("Message must be at least 5 characters long")
+      .isLength({ min: 1 })
+      .withMessage("Message must be at least 1 character long")
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -44,7 +44,7 @@ router.post(
       const { name, email, message } = req.body;
       const contact = new Contact({ name, email, message });
       await contact.save();
-
+      console.log("📩 Contact request body:", req.body);
       res.status(201).json({
         success: true,
         message: " ~ Message sent successfully"
