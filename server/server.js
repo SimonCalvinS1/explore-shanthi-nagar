@@ -8,6 +8,8 @@ import rateLimit from 'express-rate-limit';
 //import mongoSanitize from 'express-mongo-sanitize';
 import morgan from 'morgan';
 import xss from 'xss';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Import all routes
 import foodAndDiningRoutes from './routes/foodAndDining.js';
@@ -120,6 +122,25 @@ app.use((req, res) => {
         method: req.method
     });
 });
+
+// Required for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  const frontendPath = path.resolve(__dirname, '../frontend/dist'); // adjust if needed
+  app.use(express.static(frontendPath));
+
+  // For any non-API routes, send index.html
+  app.get('*', (req, res) => {
+    if (!req.originalUrl.startsWith('/api')) {
+      res.sendFile(path.join(frontendPath, 'index.html'));
+    } else {
+      res.status(404).json({ error: 'API route not found' });
+    }
+  });
+}
 
 // Start Server
 app.listen(PORT, () => {
