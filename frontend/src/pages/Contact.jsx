@@ -112,7 +112,7 @@ const Contact = () => {
                             </div>
                         </div>
                     </div>
-                    <p className="text-center text-gray-800 mt-15">&copy; {new Date().getFullYear()} Explore Shanthi Nagar. All rights reserved.</p>
+                    <p className="text-center text-gray-800 mt-15">&copy; 2025 Explore Shanthi Nagar. All rights reserved.</p>
                 </div>
             </div>
         </div>
