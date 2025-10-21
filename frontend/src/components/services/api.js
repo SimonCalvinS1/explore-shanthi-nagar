@@ -15,6 +15,11 @@ const fetchAPI = async (endpoint, options = {}) => {
     }
 };
 
+// About API
+export const aboutAPI = {
+  getAll: () => fetchAPI("/api/about"),
+};
+
 // Carousel API
 export const carouselAPI = {
     getAll: () => fetchAPI('/api/carousel'),
@@ -26,7 +31,7 @@ export const carouselAPI = {
     })
 };
 
-// 📨 Contact API
+// Contact API
 export const contactAPI = {
     sendMessage: (data) =>
         fetchAPI('/api/contact', {
@@ -34,9 +39,7 @@ export const contactAPI = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         }),
-
     getAllMessages: () => fetchAPI('/api/contact'), // Optional — for admin dashboard
-
     deleteMessage: (id) =>
         fetchAPI(`/api/contact/${id}`, {
             method: 'DELETE'
@@ -99,7 +102,6 @@ export const getAllRecommendations = async () => {
             universitiesAPI.getAll(),
             transportationAPI.getAll()
         ]);
-
         return [
             { id: 1, category: "Food & Dining", places: food },
             { id: 2, category: "Shopping", places: shopping },

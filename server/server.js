@@ -17,6 +17,7 @@ import universitiesRoutes from './routes/universitiesAndColleges.js';
 import transportationRoutes from './routes/transportation.js';
 import carouselRoutes from './routes/carousel.js';
 import contactRoutes from "./routes/contactRoutes.js";
+import aboutRoutes from "./routes/aboutRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -86,6 +87,7 @@ app.use('/', universitiesRoutes);
 app.use('/', transportationRoutes);
 app.use('/', carouselRoutes);
 app.use('/', contactRoutes);
+app.use("/", aboutRoutes);
 
 // Health & Debug Endpoints
 app.get('/api/health', (req, res) => {
