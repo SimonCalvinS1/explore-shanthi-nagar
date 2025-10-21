@@ -28,7 +28,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="py-20 w-full max-w-6xl mx-auto px-4">
+        <div className="py-20 w-full max-w-6xl mx-auto px-4 mb-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Contact Form */}
                 <div className="bg-white p-8 rounded-lg shadow-md">

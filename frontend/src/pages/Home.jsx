@@ -74,7 +74,7 @@ const Home = () => {
     };
 
     return (
-        <div className="py-20 flex flex-col justify-center items-center">
+        <div className="py-20 flex flex-col justify-center items-center mb-6">
             <div className="w-full max-w-5xl text-center">
                 <h1 className="text-3xl font-bold mb-8">Explore Shanthi Nagar with Ease!</h1>
                 
