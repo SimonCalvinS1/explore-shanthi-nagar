@@ -7,16 +7,16 @@
 
 body {
   margin: 0;
-  background-color: #f0f0f0;
+  background-color: #fcfcfc;
 }
 
 .slick-prev:before,
 .slick-next:before {
-    color: #3b82f6;
+  color: #3b82f6;
 }
 
 .slick-dots li button:before {
-    color: #3b82f6;
+  color: #3b82f6;
 }
 
 .carousel-slide {

@@ -72,13 +72,13 @@ const Recommendations = () => {
       <h1 className="text-3xl text-center font-bold mb-6 text-gray-900">
         Explore Around Shanti Nagar
       </h1>
-      <div className="space-y-8">
+      <div className="space-y-8 px-10">
         {recommendations.map((category) => (
           <div
             key={category.id}
-            className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300"
+            className="bg-gray-50 rounded-lg shadow-lg p-10 hover:shadow-xl transition-all duration-300"
           >
-            <h2 className="text-2xl font-semibold mb-4 text-blue-700 border-b pb-2 border-blue-200">
+            <h2 className="text-2xl font-semibold mb-4 text-blue-700">
               {category.category}
             </h2>
             

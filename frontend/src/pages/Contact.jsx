@@ -4,6 +4,8 @@ import { contactAPI } from "../components/services/api";
 const Contact = () => {
     const [form, setForm] = useState({ name: "", email: "", message: "" });
     const [status, setStatus] = useState("");
+    const inputFields = "w-full p-3 border border-gray-300 rounded-lg transition-colors";
+    const label = "block text-m font-bold text-gray-600 mb-2";
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,18 +30,18 @@ const Contact = () => {
     };
 
     return (
-        <div className="py-20 w-full max-w-6xl mx-auto px-4 mb-6">
+        <div className="py-20 w-full max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Contact Form */}
-                <div className="bg-white p-8 rounded-lg shadow-md">
+                <div className="bg-gray-50 p-8 rounded-lg shadow-md">
                     <h2 className="text-2xl text-center font-bold mb-6 text-gray-800">Send us a Message</h2>
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="name">
+                            <label className={label} htmlFor="name">
                                 Name:
                             </label>
                             <input 
-                                className="w-full p-3 border border-gray-300 rounded-lg transition-colors" 
+                                className={inputFields}
                                 type="text" 
                                 id="name"
                                 name="name"
@@ -49,11 +51,11 @@ const Contact = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="email">
+                            <label className={label} htmlFor="email">
                                 Email:
                             </label>
                             <input 
-                                className="w-full p-3 border border-gray-300 rounded-lg transition-colors" 
+                                className={inputFields} 
                                 type="email" 
                                 id="email"
                                 name="email"
@@ -63,11 +65,11 @@ const Contact = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="message">
+                            <label className={label} htmlFor="message">
                                 Message:
                             </label>
                             <textarea 
-                                className="w-full p-3 border border-gray-300 rounded-lg transition-colors" 
+                                className={inputFields} 
                                 id="message"
                                 name="message"
                                 rows="2"

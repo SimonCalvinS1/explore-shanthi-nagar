@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navLinkHover = "text-white hover:text-yellow-300 transition-colors";
+    const mobileNav = "text-white";
 
     return (
         <header className="fixed top-0 left-0 right-0 h-16 md:h-20 bg-gray-900 z-[1000]">
@@ -28,20 +30,20 @@ function Header() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-6 lg:gap-12">
-                    <Link to="/" className="text-white hover:text-blue-300 transition-colors">Home</Link>
-                    <Link to="/about" className="text-white hover:text-blue-300 transition-colors">About</Link>
-                    <Link to="/contact" className="text-white hover:text-blue-300 transition-colors">Contact</Link>
-                    <Link to="/places-to-visit" className="text-white hover:text-blue-300 transition-colors">Places to Visit</Link>
+                    <Link to="/" className={navLinkHover}>Home</Link>
+                    <Link to="/about" className={navLinkHover}>About</Link>
+                    <Link to="/contact" className={navLinkHover}>Contact</Link>
+                    <Link to="/places-to-visit" className={navLinkHover}>Places to Visit</Link>
                 </nav>
 
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
                     <nav className="absolute top-16 left-0 right-0 bg-gray-900 md:hidden">
                         <div className="flex flex-col items-center py-4 space-y-4">
-                            <Link to="/" className="text-white" onClick={() => setIsMenuOpen(false)}>Home</Link>
-                            <Link to="/about" className="text-white" onClick={() => setIsMenuOpen(false)}>About</Link>
-                            <Link to="/contact" className="text-white" onClick={() => setIsMenuOpen(false)}>Contact</Link>
-                            <Link to="/places-to-visit" className="text-white" onClick={() => setIsMenuOpen(false)}>Places to Visit</Link>
+                            <Link to="/" className={mobileNav} onClick={() => setIsMenuOpen(false)}>Home</Link>
+                            <Link to="/about" className={mobileNav} onClick={() => setIsMenuOpen(false)}>About</Link>
+                            <Link to="/contact" className={mobileNav} onClick={() => setIsMenuOpen(false)}>Contact</Link>
+                            <Link to="/places-to-visit" className={mobileNav} onClick={() => setIsMenuOpen(false)}>Places to Visit</Link>
                         </div>
                     </nav>
                 )}
