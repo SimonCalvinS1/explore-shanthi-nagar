@@ -22,7 +22,7 @@ export default function About() {
   }, []);
 
   return (
-    <div className="py-20 container mx-auto p-4 max-w-5xl mb-6">
+    <div className="py-20 container mx-auto p-4 max-w-7xl mb-6">
       <h1 className="text-3xl text-center font-bold mb-6">About This Guide</h1>
 
       {loading ? (
