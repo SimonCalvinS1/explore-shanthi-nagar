@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const navLinkHover = "text-white hover:text-yellow-300 transition-colors";
+    const navLinkHover = "text-white font-bold hover:text-yellow-300 transition-colors";
     const mobileNav = "text-white";
 
     return (
-        <header className="fixed top-0 left-0 right-0 h-16 md:h-20 bg-gray-900 z-[1000]">
+        <header className="fixed top-0 left-0 right-0 h-16 md:h-20 bg-[#154CB3] z-[1000]">
             <div className="max-w-7xl mx-auto h-full flex justify-between items-center px-4 md:px-8">
-                <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
+                <h1 className="text-xl md:text-xl lg:text-2xl font-bold text-white">
                     Explore Shanti Nagar
                 </h1>
 
@@ -33,6 +33,7 @@ function Header() {
                     <Link to="/" className={navLinkHover}>Home</Link>
                     <Link to="/about" className={navLinkHover}>About</Link>
                     <Link to="/contact" className={navLinkHover}>Contact</Link>
+                    <Link to="/explore" className={navLinkHover}>Explore</Link>
                     <Link to="/places-to-visit" className={navLinkHover}>Places to Visit</Link>
                 </nav>
 
