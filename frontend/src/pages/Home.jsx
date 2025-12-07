@@ -47,18 +47,6 @@ const Home = () => {
     }, []);
 
     const fetchCarouselData = async () => {
-        // Check cache first
-        const cachedData = localStorage.getItem('carousel');
-        if (cachedData) {
-            try {
-                setCarouselItems(JSON.parse(cachedData));
-                setLoading(false);
-                return;
-            } catch (e) {
-                console.error('Error parsing cached carousel data:', e);
-            }
-        }
-
         // Prevent multiple rapid requests (429 error fix)
         const now = Date.now();
         const timeSinceLastFetch = now - lastFetchTimeRef.current;
@@ -80,9 +68,7 @@ const Home = () => {
             console.log('Fetching carousel data...');
             const data = await carouselAPI.getAll();
             console.log('Carousel data received:', data);
-            
-            // Cache the data
-            localStorage.setItem('carousel', JSON.stringify(data));
+
             setCarouselItems(data);
         } catch (error) {
             console.error('Error fetching carousel data:', error);

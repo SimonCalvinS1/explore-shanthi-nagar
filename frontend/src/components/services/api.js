@@ -15,34 +15,6 @@ const fetchAPI = async (endpoint, options = {}) => {
     }
 };
 
-// Cache utility with expiration
-const getCachedData = (key) => {
-    const cached = localStorage.getItem(key);
-    if (!cached) return null;
-    
-    try {
-        const { data, timestamp } = JSON.parse(cached);
-        const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
-        
-        if (Date.now() - timestamp > CACHE_DURATION) {
-            localStorage.removeItem(key);
-            return null;
-        }
-        return data;
-    } catch (error) {
-        console.error(`Error parsing cached data for ${key}:`, error);
-        localStorage.removeItem(key);
-        return null;
-    }
-};
-
-const setCachedData = (key, data) => {
-    localStorage.setItem(key, JSON.stringify({
-        data,
-        timestamp: Date.now()
-    }));
-};
-
 // About API
 export const aboutAPI = {
   getAll: () => fetchAPI("/api/about"),
@@ -123,12 +95,6 @@ export const transportationAPI = {
 // Fetch all recommendations at once
 export const getAllRecommendations = async () => {
     try {
-        const cachedRecommendations = getCachedData('recommendations');
-        if (cachedRecommendations) {
-            console.log('Using cached recommendations');
-            return cachedRecommendations;
-        }
-
         const [food, shopping, parks, universities, transportation] = await Promise.all([
             foodAndDiningAPI.getAll(),
             shoppingAPI.getAll(),
@@ -144,8 +110,6 @@ export const getAllRecommendations = async () => {
             { id: 5, category: "Travelling & Transport", places: transportation }
         ];
 
-        // Cache the results
-        setCachedData('recommendations', recommendations);
         return recommendations;
     } catch (error) {
         console.error('Error fetching all recommendations:', error);

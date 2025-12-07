@@ -33,14 +33,6 @@ const Recommendations = () => {
   }, []);
 
   const fetchRecommendations = async () => {
-    // Check cache first
-    const cachedData = localStorage.getItem('recommendations');
-    if (cachedData) {
-      setRecommendations(JSON.parse(cachedData));
-      setLoading(false);
-      return;
-    }
-
     // Prevent multiple rapid requests (429 error fix)
     const now = Date.now();
     const timeSinceLastFetch = now - lastFetchTimeRef.current;
@@ -62,9 +54,7 @@ const Recommendations = () => {
       console.log('rs: Fetching recommendations...');
       const data = await getAllRecommendations();
       console.log(' ~ Data received:', data);
-      
-      // Cache the data AFTER successful fetch
-      localStorage.setItem('recommendations', JSON.stringify(data));
+
       setRecommendations(data);
     } catch (err) {
       console.error(" >< Error loading recommendations:", err);
