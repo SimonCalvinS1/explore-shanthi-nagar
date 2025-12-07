@@ -170,13 +170,6 @@ const Recommendations = () => {
       <h1 className="text-3xl text-center font-bold mb-2 text-gray-900">
         {selectedSection ? getSectionTitle() : 'Explore Around Shanti Nagar'}
       </h1>
-      {selectedSection && (
-        <p className="text-center text-gray-600 mb-8">
-          <a href="/places-to-visit" className="text-blue-600 underline hover:text-blue-800">
-            View All →
-          </a>
-        </p>
-      )}
       
       <div className="space-y-8 px-4 md:px-10">
         {filteredRecommendations.map((category) => (

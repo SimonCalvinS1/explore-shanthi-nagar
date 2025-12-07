@@ -138,7 +138,7 @@ const Home = () => {
         <div className="flex flex-col justify-center items-center">
             {/* Hero Section */}
             <div className="py-25 flex flex-col justify-center items-center w-full">
-                <div className="w-full max-w-7xl text-center px-4">
+                <div className="w-full max-w-7xl text-center">
                     <h1 className="text-3xl font-bold mb-8">Explore Shanti Nagar with Ease!</h1>
                     
                     <p className="text-2xl mb-6">
@@ -152,7 +152,7 @@ const Home = () => {
                     </p>
 
                     <p className="text-xl mb-6">
-                        <span className="font-semibold">"Explore Shanti Nagar Now"</span> is a website designed to help people discover the best of Shanti Nagar and nearby areas in Bengaluru. 
+                        <span className="font-semibold">"Explore Shanti Nagar"</span> is a website designed to help people discover the best of Shanti Nagar and nearby areas in Bengaluru. 
                         We recommend you several good-to-visit spots in Shanti Nagar and nearby areas, be it travel for fun, to enjoy, or to explore this area and nearby places with just a few clicks!
                         We make it easy to explore and discover places in and around Shanti Nagar and will help you in exploring and connecting with Shanti Nagar in an easy manner.
                     </p>
@@ -168,7 +168,7 @@ const Home = () => {
 
             {/* Top Spots Carousel Section */}
             <div className="w-full bg-gray-50">
-                <div className="w-full max-w-7xl mx-auto px-4">
+                <div className="w-full max-w-7xl mx-auto">
                     <h1 className="text-2xl mt-6 mb-8 font-semibold text-center">Featured Spots</h1>
                     <div className="w-full max-w-[600px] mx-auto mb-8">
                         {renderCarousel()}
@@ -180,7 +180,7 @@ const Home = () => {
             {/* Why Choose Us Section */}
             <div className="w-full py-16 px-4">
                 <div className="w-full max-w-7xl mx-auto">
-                    <h2 className="text-2xl font-semibold mb-12 text-center">Why Choose Explore Shanti Nagar?</h2>
+                    <h2 className="text-2xl font-semibold mb-12 text-center">Why Choose "Explore Shanti Nagar"?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                         <div className="p-6 bg-blue-100 rounded-lg">
                             <h3 className="text-xl font-semibold mb-3 text-blue-900">Local Expertise</h3>

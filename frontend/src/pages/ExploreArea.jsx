@@ -166,7 +166,7 @@ const ExploreArea = () => {
                             Back to Home
                         </Link>
                         <Link to="/contact" className="bg-blue-700 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition-colors">
-                            Get Recommendations
+                            Suggest Feedback
                         </Link>
                     </div>
                 </div>
