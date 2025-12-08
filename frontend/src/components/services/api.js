@@ -1,6 +1,20 @@
 // frontend/src/services/api.js
 const API_URL = import.meta.env.VITE_API_URL;
 
+const keepBackendAlive = () => {
+    const PING_INTERVAL = 14 * 60 * 1000; // Ping every 14 minutes (Render spins down after 15)
+    
+    setInterval(async () => {
+        try {
+            await fetch(`${API_URL}/api/health`, { method: 'GET' });
+            console.log('Backend pinged - keeping alive');
+        } catch (error) {
+            console.log('Ping failed (backend may be sleeping):', error);
+        }
+    }, PING_INTERVAL);
+};
+keepBackendAlive();
+
 // Generic fetch helper with error handling
 const fetchAPI = async (endpoint, options = {}) => {
     try {
