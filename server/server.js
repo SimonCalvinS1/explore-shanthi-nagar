@@ -8,6 +8,7 @@ import rateLimit from 'express-rate-limit';
 //import mongoSanitize from 'express-mongo-sanitize';
 import morgan from 'morgan';
 import xss from 'xss';
+import compression from 'compression';
 
 // Import all routes
 import foodAndDiningRoutes from './routes/foodAndDining.js';
@@ -47,6 +48,8 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
+
+app.use(compression());
 
 // Parse JSON bodies
 app.use(express.json({ limit: '10kb' })); // Limit payload size

@@ -1,4 +1,3 @@
-// frontend/src/services/api.js
 const API_URL = import.meta.env.VITE_API_URL;
 
 const getCachedData = (key, durationSeconds = 30) => {
@@ -14,7 +13,8 @@ const getCachedData = (key, durationSeconds = 30) => {
             return null;
         }
         return data;
-    } catch (e) {
+    } catch (error) {
+        console.error('Error parsing cached data:', error);
         localStorage.removeItem(key);
         return null;
     }
@@ -28,17 +28,32 @@ const setCachedData = (key, data) => {
 };
 
 const keepBackendAlive = () => {
-    const PING_INTERVAL = 5 * 60 * 1000; 
+    const PING_INTERVAL = 10 * 60 * 1000; // Ping every 10 minutes (Render spins down after 15)
     
-    setInterval(async () => {
+    // Ping immediately on app load
+    (async () => {
         try {
             await fetch(`${API_URL}/api/health`, { method: 'GET' });
-            console.log('Backend pinged - keeping alive');
+            console.log('Backend pinged on startup - keeping alive');
         } catch (error) {
-            console.log('Ping failed (backend may be sleeping):', error);
+            console.log('Initial ping failed:', error.message);
+        }
+    })();
+    
+    // Then ping every 10 minutes
+    setInterval(async () => {
+        try {
+            const response = await fetch(`${API_URL}/api/health`, { method: 'GET' });
+            if (response.ok) {
+                console.log('Backend pinged - keeping alive', new Date().toLocaleTimeString());
+            }
+        } catch (error) {
+            console.log('Ping failed (backend may be sleeping):', error.message);
         }
     }, PING_INTERVAL);
 };
+
+// Call this on app initialization
 keepBackendAlive();
 
 // Generic fetch helper with error handling
@@ -79,7 +94,7 @@ export const contactAPI = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         }),
-    getAllMessages: () => fetchAPI('/api/contact'), // Optional — for admin dashboard
+    getAllMessages: () => fetchAPI('/api/contact'),
     deleteMessage: (id) =>
         fetchAPI(`/api/contact/${id}`, {
             method: 'DELETE'
@@ -135,12 +150,15 @@ export const transportationAPI = {
 // Fetch all recommendations at once
 export const getAllRecommendations = async () => {
     try {
-        const cachedRecommendations = getCachedData('recommendations', 60); // 60 second cache
+        // Try to use cache first (60 second cache)
+        const cachedRecommendations = getCachedData('recommendations', 60);
         if (cachedRecommendations) {
             console.log('Using cached recommendations');
             return cachedRecommendations;
         }
 
+        console.log('Fetching fresh recommendations from API...');
+        
         const [food, shopping, parks, universities, transportation] = await Promise.all([
             foodAndDiningAPI.getAll(),
             shoppingAPI.getAll(),
@@ -148,6 +166,7 @@ export const getAllRecommendations = async () => {
             universitiesAPI.getAll(),
             transportationAPI.getAll()
         ]);
+
         const recommendations = [
             { id: 1, category: "Food & Dining", places: food },
             { id: 2, category: "Shopping", places: shopping },
@@ -157,6 +176,7 @@ export const getAllRecommendations = async () => {
         ];
 
         setCachedData('recommendations', recommendations);
+        console.log('Recommendations cached');
         return recommendations;
     } catch (error) {
         console.error('Error fetching all recommendations:', error);
