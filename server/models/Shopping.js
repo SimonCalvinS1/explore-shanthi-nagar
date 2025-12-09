@@ -8,4 +8,8 @@ const shoppingSchema = new mongoose.Schema({
     image: { type: String, default: '' }
 }, { timestamps: true });
 
+shoppingSchema.index({ category: 1 });
+shoppingSchema.index({ name: 1 });
+shoppingSchema.index({ createdAt: -1 });
+
 export default mongoose.model('Shopping', shoppingSchema, 'shopping');

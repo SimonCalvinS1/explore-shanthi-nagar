@@ -1,134 +1,148 @@
-// ===== server/server.js =====
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
-//import mongoSanitize from 'express-mongo-sanitize';
-import morgan from 'morgan';
-import xss from 'xss';
 import compression from 'compression';
-
-// Import all routes
-import foodAndDiningRoutes from './routes/foodAndDining.js';
-import shoppingRoutes from './routes/shopping.js';
-import parksRoutes from './routes/parksAndRecreation.js';
-import universitiesRoutes from './routes/universitiesAndColleges.js';
-import transportationRoutes from './routes/transportation.js';
-import carouselRoutes from './routes/carousel.js';
-import contactRoutes from "./routes/contactRoutes.js";
-import aboutRoutes from "./routes/aboutRoutes.js";
+import helmet from 'helmet';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
 dotenv.config();
-const app = express();
 
-const PORT = process.env.PORT;
+const app = express();
+const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 const ALLOWED_ORIGIN = process.env.CORS_ORIGIN;
 
-// Custom XSS middleware
+//Middleware
+
+//Custom XSS middleware
 app.use((req, res, next) => {
-    if (req.body) {
-        for (let key in req.body) {
-            if (typeof req.body[key] === 'string') {
-                req.body[key] = xss(req.body[key]);
-            }
-        }
-    }
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
     next();
 });
 
-// Set secure HTTP headers
+//Security headers
 app.use(helmet());
 
-// Enable CORS with origin restriction
+//Compression - CRITICAL for fast responses
+app.use(compression({
+    level: 6,
+    threshold: 1024 // Only compress responses > 1KB
+}));
+
+//CORS
 app.use(cors({
     origin: ALLOWED_ORIGIN,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
 
-app.use(compression());
+//Body parsing with size limits
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
-// Parse JSON bodies
-app.use(express.json({ limit: '10kb' })); // Limit payload size
-
-// Sanitize data to prevent MongoDB operator injection
-//app.use(mongoSanitize());
-
-// Request logging (use 'dev' for local debugging)
-app.use(morgan('dev'));
-
-// Rate limiting to prevent brute-force or DDoS attacks
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-    message: { error: 'Too many requests, please try again later.' }
-});
-app.use('/api', limiter);
-
-// Debug log for incoming requests
+//Request Logging (minimal for speed)
 app.use((req, res, next) => {
-    console.log(`➡️ ${req.method} ${req.originalUrl}`);
+    const start = Date.now();
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        if (duration > 1000) {
+            console.log(`${req.method} ${req.path} - ${res.statusCode} - ${duration}ms`);
+        }
+    });
     next();
 });
 
-// Database Connection
-mongoose.connect(MONGODB_URI)
-    .then(() => {
-        console.log(' ~ Connected to MongoDB');
-        console.log('Database:', mongoose.connection.name);
-    })
-    .catch(err => console.error(' >< MongoDB connection error:', err));
+//Database Connection
+let isConnected = false;
 
-// Routes
-app.use('/', foodAndDiningRoutes);
-app.use('/', shoppingRoutes);
-app.use('/', parksRoutes);
-app.use('/', universitiesRoutes);
-app.use('/', transportationRoutes);
-app.use('/', carouselRoutes);
-app.use('/', contactRoutes);
-app.use("/", aboutRoutes);
-
-// Health & Debug Endpoints
-app.get('/api/health', (req, res) => {
-    res.json({
-        status: 'ok',
-        server: 'running',
-        database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
-        timestamp: new Date().toISOString()
-    });
-});
-
-app.get('/api/test-collections', async (req, res) => {
+const connectDB = async () => {
+    if (isConnected) return;
+    
     try {
-        const collections = await mongoose.connection.db.listCollections().toArray();
-        const collectionNames = collections.map(c => c.name);
+        await mongoose.connect(MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            retryWrites: true,
+            w: 'majority',
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
+            maxPoolSize: 10,
+            minPoolSize: 5
+        });
+        isConnected = true;
+        console.log('~ MongoDB connected');
+    } catch (error) {
+        console.error('>< MongoDB connection error:', error.message);
+        // Don't exit - allow graceful degradation
+    }
+};
+
+connectDB();
+
+// ===== Health Check Endpoint (CRITICAL) =====
+app.get('/api/health', async (req, res) => {
+    try {
+        await mongoose.connection.db.admin().ping();
         res.json({
-            message: 'Collections in database',
-            collections: collectionNames,
-            count: collectionNames.length
+            status: 'ok',
+            server: 'running',
+            database: 'connected',
+            timestamp: new Date().toISOString()
         });
     } catch (error) {
-        console.error('Collection fetch error:', error);
-        res.status(500).json({ error: 'Server error while fetching collections' });
+        res.status(503).json({
+            status: 'error',
+            server: 'running',
+            database: 'disconnected',
+            error: error.message
+        });
     }
 });
 
-// 404 Handler
-app.use((req, res) => {
-    res.status(404).json({
-        error: 'Route not found',
-        requestedUrl: req.originalUrl,
-        method: req.method
+// ===== Routes =====
+import aboutRouter from './routes/about.js';
+import carouselRouter from './routes/carousel.js';
+import contactRouter from './routes/contact.js';
+import foodRouter from './routes/food.js';
+import shoppingRouter from './routes/shopping.js';
+import parksRouter from './routes/parks.js';
+import universitiesRouter from './routes/universities.js';
+import transportationRouter from './routes/transportation.js';
+
+app.use('/api/about', aboutRouter);
+app.use('/api/carousel', carouselRouter);
+app.use('/api/contact', contactRouter);
+app.use('/api/food', foodRouter);
+app.use('/api/shopping', shoppingRouter);
+app.use('/api/parks', parksRouter);
+app.use('/api/universities', universitiesRouter);
+app.use('/api/transportation', transportationRouter);
+
+// ===== Error Handling =====
+app.use((err, req, res, next) => {
+    console.error('Error:', err.message);
+    res.status(err.status || 500).json({
+        error: err.message || 'Internal Server Error'
     });
 });
 
-// Start Server
-app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`);
-    console.log(`CORS Origin: ${ALLOWED_ORIGIN}`);
-    console.log(`Routes available under /api`);
+// ===== 404 Handler =====
+app.use((req, res) => {
+    res.status(404).json({ error: 'Route not found' });
+});
+
+// ===== Server Start =====
+const server = app.listen(PORT, () => {
+    console.log(`--->> Server running on http://localhost:${PORT}`);
+});
+
+// ===== Graceful Shutdown =====
+process.on('SIGTERM', () => {
+    console.log('SIGTERM received, shutting down gracefully');
+    server.close(async () => {
+        await mongoose.connection.close();
+        process.exit(0);
+    });
 });

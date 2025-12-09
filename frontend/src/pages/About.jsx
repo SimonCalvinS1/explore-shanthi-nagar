@@ -56,7 +56,7 @@ export default function About() {
         </p>
         <p className="text-gray-700 text-lg">
           We hope this guide helps you appreciate the vibrant charm, local
-          flavors, and community warmth of <strong>Shanthi Nagar</strong>.
+          flavors, and community warmth of <strong>Shanti Nagar</strong>.
         </p>
       </div>
     </div>
