@@ -43,10 +43,13 @@ app.use(helmet());
 
 // Enable CORS with origin restriction
 app.use(cors({
-    origin: ALLOWED_ORIGIN,
+    origin: [
+        "https://explore-shanthi-nagar.vercel.app"
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
+
 
 // Parse JSON bodies
 app.use(express.json({ limit: '10kb' })); // Limit payload size
