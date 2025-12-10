@@ -80,14 +80,14 @@ mongoose.connect(MONGODB_URI)
     .catch(err => console.error(' >< MongoDB connection error:', err));
 
 // Routes
-app.use('/', foodAndDiningRoutes);
-app.use('/', shoppingRoutes);
-app.use('/', parksRoutes);
-app.use('/', universitiesRoutes);
-app.use('/', transportationRoutes);
-app.use('/', carouselRoutes);
-app.use('/', contactRoutes);
-app.use("/", aboutRoutes);
+app.use('/api/food', foodAndDiningRoutes);
+app.use('/api/shopping', shoppingRoutes);
+app.use('/api/parks', parksRoutes);
+app.use('/api/universities', universitiesRoutes);
+app.use('/api/transportation', transportationRoutes);
+app.use('/api/carousel', carouselRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/about', aboutRoutes);
 
 // Health & Debug Endpoints
 app.get('/api/health', (req, res) => {

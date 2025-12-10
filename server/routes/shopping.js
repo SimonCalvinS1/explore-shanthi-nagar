@@ -4,7 +4,7 @@ import Shopping from '../models/Shopping.js';
 
 const router = express.Router();
 
-router.get('/api/shopping', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const items = await Shopping.find();
         res.json(items);
@@ -13,7 +13,7 @@ router.get('/api/shopping', async (req, res) => {
     }
 });
 
-router.post('/api/shopping', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const item = new Shopping(req.body);
         await item.save();

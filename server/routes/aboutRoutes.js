@@ -3,7 +3,7 @@ import AboutImage from "../models/AboutImage.js";
 
 const router = express.Router();
 
-router.get("/api/about", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const images = await AboutImage.find();
     res.json(images);

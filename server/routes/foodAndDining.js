@@ -4,7 +4,7 @@ import FoodAndDining from '../models/FoodAndDining.js';
 
 const router = express.Router();
 
-router.get('/api/food', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const items = await FoodAndDining.find();
         res.json(items);
@@ -13,7 +13,7 @@ router.get('/api/food', async (req, res) => {
     }
 });
 
-router.post('/api/food', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const item = new FoodAndDining(req.body);
         await item.save();
@@ -23,7 +23,7 @@ router.post('/api/food', async (req, res) => {
     }
 });
 
-router.get('/api/food/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const item = await FoodAndDining.findById(req.params.id);
         if (!item) return res.status(404).json({ message: 'Not found' });

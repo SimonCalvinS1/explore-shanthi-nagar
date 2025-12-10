@@ -4,7 +4,7 @@ import ParksAndRecreation from '../models/ParksAndRecreation.js';
 
 const router = express.Router();
 
-router.get('/api/parks', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const items = await ParksAndRecreation.find();
         res.json(items);
@@ -13,7 +13,7 @@ router.get('/api/parks', async (req, res) => {
     }
 });
 
-router.post('/api/parks', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const item = new ParksAndRecreation(req.body);
         await item.save();

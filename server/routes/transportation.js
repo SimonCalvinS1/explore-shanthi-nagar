@@ -4,7 +4,7 @@ import Transportation from '../models/Transportation.js';
 
 const router = express.Router();
 
-router.get('/api/transportation', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const items = await Transportation.find();
         res.json(items);
@@ -13,7 +13,7 @@ router.get('/api/transportation', async (req, res) => {
     }
 });
 
-router.post('/api/transportation', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const item = new Transportation(req.body);
         await item.save();

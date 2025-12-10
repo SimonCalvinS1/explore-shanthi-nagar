@@ -4,7 +4,7 @@ import Carousel from '../models/Carousel.js';
 const router = express.Router();
 
 // Fetch all carousel items
-router.get('/api/carousel', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const items = await Carousel.find().sort({ createdAt: -1 });
     res.json(items);
@@ -14,7 +14,7 @@ router.get('/api/carousel', async (req, res) => {
 });
 
 // Add a new carousel item (with image URL)
-router.post('/api/carousel', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const item = new Carousel({
       title: req.body.title,

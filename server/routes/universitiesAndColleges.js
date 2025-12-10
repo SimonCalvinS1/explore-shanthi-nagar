@@ -4,7 +4,7 @@ import UniversitiesAndColleges from '../models/UniversitiesAndColleges.js';
 
 const router = express.Router();
 
-router.get('/api/universities', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const items = await UniversitiesAndColleges.find();
         res.json(items);
@@ -13,7 +13,7 @@ router.get('/api/universities', async (req, res) => {
     }
 });
 
-router.post('/api/universities', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const item = new UniversitiesAndColleges(req.body);
         await item.save();
