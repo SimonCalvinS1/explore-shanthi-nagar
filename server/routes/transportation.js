@@ -1,30 +1,25 @@
+// ===== server/routes/transportation.js =====
 import express from 'express';
 import Transportation from '../models/Transportation.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/api/transportation', async (req, res) => {
     try {
-        res.set('Cache-Control', 'public, max-age=300');
-        
-        const transportation = await Transportation.find().lean();
-        res.json(transportation);
+        const items = await Transportation.find();
+        res.json(items);
     } catch (error) {
-        console.error('Error fetching transportation:', error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ message: error.message });
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.post('/api/transportation', async (req, res) => {
     try {
-        const item = await Transportation.findById(req.params.id).lean();
-        if (!item) {
-            return res.status(404).json({ error: 'Item not found' });
-        }
-        res.json(item);
+        const item = new Transportation(req.body);
+        await item.save();
+        res.status(201).json(item);
     } catch (error) {
-        console.error('Error fetching transportation item:', error);
-        res.status(500).json({ error: error.message });
+        res.status(400).json({ message: error.message });
     }
 });
 

@@ -1,108 +1,26 @@
+// frontend/src/services/api.js
 const API_URL = import.meta.env.VITE_API_URL;
 
-// ===== Cache Management =====
-const getCachedData = (key, durationSeconds = 30) => {
-    const cached = localStorage.getItem(key);
-    if (!cached) return null;
-    
-    try {
-        const { data, timestamp } = JSON.parse(cached);
-        const CACHE_DURATION = durationSeconds * 1000;
-        
-        if (Date.now() - timestamp > CACHE_DURATION) {
-            localStorage.removeItem(key);
-            return null;
-        }
-        return data;
-    } catch (error) {
-        console.error('Cache parse error:', error);
-        localStorage.removeItem(key);
-        return null;
-    }
-};
-
-const setCachedData = (key, data) => {
-    try {
-        localStorage.setItem(key, JSON.stringify({
-            data,
-            timestamp: Date.now()
-        }));
-    } catch (error) {
-        console.error('Cache write error:', error);
-    }
-};
-
-// ===== Keep Backend Alive =====
-const keepBackendAlive = () => {
-    // Ping immediately on app load
-    (async () => {
-        try {
-            const response = await fetchWithTimeout(`${API_URL}/api/health`, {
-                method: 'GET'
-            }, 3000);
-            if (response.ok) {
-                console.log('Backend startup ping successful');
-            }
-        } catch (error) {
-            console.log('Backend startup ping failed', error);
-        }
-    })();
-    
-    // Ping every 10 minutes to keep alive
-    const PING_INTERVAL = 10 * 60 * 1000;
-    setInterval(async () => {
-        try {
-            await fetchWithTimeout(`${API_URL}/api/health`, {
-                method: 'GET'
-            }, 3000);
-            console.log('Keep-alive ping sent');
-        } catch (error) {
-            console.log('Keep-alive ping failed', error);
-        }
-    }, PING_INTERVAL);
-};
-
-// Initialize keep-alive
-keepBackendAlive();
-
-// ===== Fetch Helper with Manual Timeout =====
-const fetchWithTimeout = (url, options = {}, timeoutMs = 8000) => {
-    return Promise.race([
-        fetch(url, options),
-        new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('Request timeout')), timeoutMs)
-        )
-    ]);
-};
-
+// Generic fetch helper with error handling
 const fetchAPI = async (endpoint, options = {}) => {
-    const timeoutSeconds = options.timeout || 8;
-    const timeoutMs = timeoutSeconds * 1000;
-    
     try {
-        const response = await fetchWithTimeout(
-            `${API_URL}${endpoint}`,
-            options,
-            timeoutMs
-        );
-        
+        const response = await fetch(`${API_URL}${endpoint}`, options);
         if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
         return await response.json();
     } catch (error) {
-        console.error(`API Error (${endpoint}):`, error.message);
+        console.error(`API Error (${endpoint}):`, error);
         throw error;
     }
 };
 
-// ===== API Endpoints =====
-
+// About API
 export const aboutAPI = {
-    getAll: () => fetchAPI("/api/about")
+  getAll: () => fetchAPI("/api/about"),
 };
 
+// Carousel API
 export const carouselAPI = {
     getAll: () => fetchAPI('/api/carousel'),
     getById: (id) => fetchAPI(`/api/carousel/${id}`),
@@ -113,16 +31,22 @@ export const carouselAPI = {
     })
 };
 
+// Contact API
 export const contactAPI = {
-    sendMessage: (data) => fetchAPI('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    }),
-    getAllMessages: () => fetchAPI('/api/contact'),
-    deleteMessage: (id) => fetchAPI(`/api/contact/${id}`, { method: 'DELETE' })
+    sendMessage: (data) =>
+        fetchAPI('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }),
+    getAllMessages: () => fetchAPI('/api/contact'), // Optional — for admin dashboard
+    deleteMessage: (id) =>
+        fetchAPI(`/api/contact/${id}`, {
+            method: 'DELETE'
+        })
 };
 
+// Food & Dining API
 export const foodAndDiningAPI = {
     getAll: () => fetchAPI('/api/food'),
     getById: (id) => fetchAPI(`/api/food/${id}`),
@@ -139,6 +63,7 @@ export const foodAndDiningAPI = {
     delete: (id) => fetchAPI(`/api/food/${id}`, { method: 'DELETE' })
 };
 
+// Shopping API
 export const shoppingAPI = {
     getAll: () => fetchAPI('/api/shopping'),
     getById: (id) => fetchAPI(`/api/shopping/${id}`),
@@ -149,36 +74,27 @@ export const shoppingAPI = {
     })
 };
 
+// Parks & Recreation API
 export const parksAPI = {
     getAll: () => fetchAPI('/api/parks'),
     getById: (id) => fetchAPI(`/api/parks/${id}`)
 };
 
+// Universities & Colleges API
 export const universitiesAPI = {
     getAll: () => fetchAPI('/api/universities'),
     getById: (id) => fetchAPI(`/api/universities/${id}`)
 };
 
+// Transportation API
 export const transportationAPI = {
     getAll: () => fetchAPI('/api/transportation'),
     getById: (id) => fetchAPI(`/api/transportation/${id}`)
 };
 
-// ===== Combined Recommendations Fetch =====
+// Fetch all recommendations at once
 export const getAllRecommendations = async () => {
     try {
-        // Check cache first (30 second cache)
-        const cachedRecommendations = getCachedData('recommendations', 30);
-        if (cachedRecommendations) {
-            console.log('Using cached recommendations');
-            return cachedRecommendations;
-        }
-
-        console.log('Fetching fresh recommendations...');
-        
-        const startTime = Date.now();
-        
-        // Fetch all in parallel with timeout
         const [food, shopping, parks, universities, transportation] = await Promise.all([
             foodAndDiningAPI.getAll(),
             shoppingAPI.getAll(),
@@ -186,10 +102,6 @@ export const getAllRecommendations = async () => {
             universitiesAPI.getAll(),
             transportationAPI.getAll()
         ]);
-
-        const fetchTime = Date.now() - startTime;
-        console.log(`Data fetched in ${fetchTime}ms`);
-
         const recommendations = [
             { id: 1, category: "Food & Dining", places: food },
             { id: 2, category: "Shopping", places: shopping },
@@ -198,10 +110,9 @@ export const getAllRecommendations = async () => {
             { id: 5, category: "Travelling & Transport", places: transportation }
         ];
 
-        setCachedData('recommendations', recommendations);
         return recommendations;
     } catch (error) {
-        console.error('Error fetching recommendations:', error);
+        console.error('Error fetching all recommendations:', error);
         throw error;
     }
 };

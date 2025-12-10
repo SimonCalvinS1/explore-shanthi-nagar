@@ -3,40 +3,30 @@ import Carousel from '../models/Carousel.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    try {
-        res.set('Cache-Control', 'public, max-age=600');
-        
-        const carouselItems = await Carousel.find().limit(10).lean();
-        res.json(carouselItems);
-    } catch (error) {
-        console.error('Error fetching carousel:', error);
-        res.status(500).json({ error: error.message });
-    }
+// Fetch all carousel items
+router.get('/api/carousel', async (req, res) => {
+  try {
+    const items = await Carousel.find().sort({ createdAt: -1 });
+    res.json(items);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-router.get('/:id', async (req, res) => {
-    try {
-        const item = await Carousel.findById(req.params.id).lean();
-        if (!item) {
-            return res.status(404).json({ error: 'Item not found' });
-        }
-        res.json(item);
-    } catch (error) {
-        console.error('Error fetching carousel item:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-router.post('/', async (req, res) => {
-    try {
-        const newItem = new Carousel(req.body);
-        await newItem.save();
-        res.status(201).json(newItem);
-    } catch (error) {
-        console.error('Error creating carousel item:', error);
-        res.status(500).json({ error: error.message });
-    }
+// Add a new carousel item (with image URL)
+router.post('/api/carousel', async (req, res) => {
+  try {
+    const item = new Carousel({
+      title: req.body.title,
+      description: req.body.description,
+      image: req.body.image, // must be a valid URL
+      link: req.body.link || ''
+    });
+    await item.save();
+    res.status(201).json(item);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 export default router;
