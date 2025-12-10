@@ -37,15 +37,14 @@ const keepBackendAlive = () => {
     // Ping immediately on app load
     (async () => {
         try {
-            const response = await fetch(`${API_URL}/api/health`, {
-                method: 'GET',
-                signal: AbortSignal.timeout(3000)
-            });
+            const response = await fetchWithTimeout(`${API_URL}/api/health`, {
+                method: 'GET'
+            }, 3000);
             if (response.ok) {
-                console.log('✅ Backend startup ping successful');
+                console.log('Backend startup ping successful');
             }
         } catch (error) {
-            console.log('⚠️ Backend startup ping failed', error);
+            console.log('Backend startup ping failed', error);
         }
     })();
     
@@ -53,13 +52,12 @@ const keepBackendAlive = () => {
     const PING_INTERVAL = 10 * 60 * 1000;
     setInterval(async () => {
         try {
-            await fetch(`${API_URL}/api/health`, {
-                method: 'GET',
-                signal: AbortSignal.timeout(3000)
-            });
-            console.log('✅ Keep-alive ping sent');
+            await fetchWithTimeout(`${API_URL}/api/health`, {
+                method: 'GET'
+            }, 3000);
+            console.log('Keep-alive ping sent');
         } catch (error) {
-            console.log('⚠️ Keep-alive ping failed', error);
+            console.log('Keep-alive ping failed', error);
         }
     }, PING_INTERVAL);
 };
@@ -67,20 +65,26 @@ const keepBackendAlive = () => {
 // Initialize keep-alive
 keepBackendAlive();
 
-// ===== Fetch Helper with Timeout =====
+// ===== Fetch Helper with Manual Timeout =====
+const fetchWithTimeout = (url, options = {}, timeoutMs = 8000) => {
+    return Promise.race([
+        fetch(url, options),
+        new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('Request timeout')), timeoutMs)
+        )
+    ]);
+};
+
 const fetchAPI = async (endpoint, options = {}) => {
     const timeoutSeconds = options.timeout || 8;
+    const timeoutMs = timeoutSeconds * 1000;
     
     try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeoutSeconds * 1000);
-        
-        const response = await fetch(`${API_URL}${endpoint}`, {
-            ...options,
-            signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
+        const response = await fetchWithTimeout(
+            `${API_URL}${endpoint}`,
+            options,
+            timeoutMs
+        );
         
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -166,11 +170,11 @@ export const getAllRecommendations = async () => {
         // Check cache first (30 second cache)
         const cachedRecommendations = getCachedData('recommendations', 30);
         if (cachedRecommendations) {
-            console.log('📦 Using cached recommendations');
+            console.log('Using cached recommendations');
             return cachedRecommendations;
         }
 
-        console.log('🔄 Fetching fresh recommendations...');
+        console.log('Fetching fresh recommendations...');
         
         const startTime = Date.now();
         
@@ -184,7 +188,7 @@ export const getAllRecommendations = async () => {
         ]);
 
         const fetchTime = Date.now() - startTime;
-        console.log(`✅ Data fetched in ${fetchTime}ms`);
+        console.log(`Data fetched in ${fetchTime}ms`);
 
         const recommendations = [
             { id: 1, category: "Food & Dining", places: food },
