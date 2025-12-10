@@ -80,14 +80,14 @@ mongoose.connect(MONGODB_URI)
     .catch(err => console.error(' >< MongoDB connection error:', err));
 
 // Routes
-app.use('/api', foodAndDiningRoutes);
-app.use('/api', shoppingRoutes);
-app.use('/api', parksRoutes);
-app.use('/api', universitiesRoutes);
-app.use('/api', transportationRoutes);
-app.use('/api', carouselRoutes);
-app.use('/api', contactRoutes);
-app.use('/api', aboutRoutes);
+app.use('/', foodAndDiningRoutes);
+app.use('/', shoppingRoutes);
+app.use('/', parksRoutes);
+app.use('/', universitiesRoutes);
+app.use('/', transportationRoutes);
+app.use('/', carouselRoutes);
+app.use('/', contactRoutes);
+app.use("/", aboutRoutes);
 
 // Health & Debug Endpoints
 app.get('/api/health', (req, res) => {
@@ -119,18 +119,7 @@ app.use((req, res) => {
     res.status(404).json({
         error: 'Route not found',
         requestedUrl: req.originalUrl,
-        method: req.method,
-        availableEndpoints: [
-            '/api/health',
-            '/api/food',
-            '/api/shopping',
-            '/api/parks',
-            '/api/universities',
-            '/api/transportation',
-            '/api/carousel',
-            '/api/contact',
-            '/api/about'
-        ]
+        method: req.method
     });
 });
 
