@@ -1,4 +1,4 @@
-## Explore Shanhi Nagar Now!
+## Explore Shanti Nagar Now!
 A full-stack website which acts as a tourist guide for people who would like to explore Shanti Nagar and its surrondings.
 
 ## Tech Stack
