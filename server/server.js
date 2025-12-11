@@ -18,6 +18,7 @@ import transportationRoutes from './routes/transportation.js';
 import carouselRoutes from './routes/carousel.js';
 import contactRoutes from "./routes/contactRoutes.js";
 import aboutRoutes from "./routes/aboutRoutes.js";
+import exploreAreaRoutes from "./routes/exploreAreaRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -91,6 +92,7 @@ app.use('/api/transportation', transportationRoutes);
 app.use('/api/carousel', carouselRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/about', aboutRoutes);
+app.use("/api/explore", exploreAreaRoutes);
 
 // Health & Debug Endpoints
 app.get('/api/health', (req, res) => {

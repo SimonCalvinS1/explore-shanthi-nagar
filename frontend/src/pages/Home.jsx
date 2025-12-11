@@ -213,8 +213,8 @@ const Home = () => {
                             { name: 'Parks', section: 'parks-recreation' },
                             { name: 'Shopping', section: 'shopping' },
                             { name: 'Entertainment', section: 'entertainment' },
-                            { name: 'Education', section: 'education' },
-                            { name: 'Healthcare', section: 'healthcare' },
+                            { name: 'Universities', section: 'universities-colleges' },
+                            { name: 'Cultural Heritage', section: 'culture' },
                             { name: 'Transport', section: 'transport' }
                         ].map((category, idx) => (
                             <Link 

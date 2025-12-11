@@ -7,90 +7,304 @@ const ExploreArea = () => {
 
     // Area data mapping
     const areaData = {
-        'wilson-garden': {
-            name: 'Wilson Garden',
-            description: 'A vibrant neighborhood known for its upscale dining and boutique shopping',
+        "wilson-garden": {
+            name: "Wilson Garden",
+            description:
+            "A centrally located neighborhood known for its hospitals, parks, cafés, and close access to key Bengaluru landmarks.",
             attractions: [
-                { id: 1, title: 'Wilson Garden Park', category: 'Parks', description: 'Serene green space perfect for morning walks' },
-                { id: 2, title: 'Artisan Cafe', category: 'Cafes', description: 'Cozy cafe with specialty coffee and pastries' },
-                { id: 3, title: 'Local Market', category: 'Shopping', description: 'Traditional market with fresh produce and local goods' }
+            {
+                id: 1,
+                title: "Lalbagh Botanical Garden",
+                category: "Parks & Nature",
+                description:
+                "A historic 240-acre botanical garden famous for its glasshouse, annual flower shows, lake, and centuries-old trees.",
+            },
+            {
+                id: 2,
+                title: "NIMHANS Brain Museum",
+                category: "Museum",
+                description:
+                "A unique scientific museum showcasing preserved human brain specimens and educational exhibits related to neuroscience.",
+            },
+            {
+                id: 3,
+                title: "Adugodi Junction Street Market",
+                category: "Local Experience",
+                description:
+                "A bustling local market area connecting Wilson Garden, Koramangala, and Dairy Circle with street shops and eateries.",
+            },
             ],
             restaurants: [
-                { id: 1, name: 'The Garden Bistro', cuisine: 'Continental', rating: 4.5 },
-                { id: 2, name: 'Spice House', cuisine: 'Indian', rating: 4.3 },
-                { id: 3, name: 'Noodle Corner', cuisine: 'Asian', rating: 4.2 }
-            ]
+            {
+                id: 1,
+                name: "Pai Vihar",
+                cuisine: "South Indian · Vegetarian",
+                rating: 4.2,
+            },
+            {
+                id: 2,
+                name: "Taj Hotel (Original)",
+                cuisine: "South Indian · Biriyani · Non-veg",
+                rating: 4.3,
+            },
+            {
+                id: 3,
+                name: "Chinita Real Mexican Food",
+                cuisine: "Mexican · Casual Dining",
+                rating: 4.5,
+            },
+            ],
         },
-        'hosur-road': {
-            name: 'Hosur Road',
-            description: 'A bustling commercial hub with diverse dining options and tech startups',
+
+        // ---------------------------------------------
+        "hosur-road": {
+            name: "Hosur Road",
+            description:
+            "A major arterial road known for tech parks, colleges, hospitals, and excellent connectivity across South Bengaluru.",
             attractions: [
-                { id: 1, title: 'Tech Park', category: 'Entertainment', description: 'Modern commercial complex with entertainment zones' },
-                { id: 2, title: 'Food Street', category: 'Restaurants', description: 'Famous for street food and quick bites' },
-                { id: 3, title: 'Shopping Complex', category: 'Shopping', description: 'Multi-brand retail stores and boutiques' }
+            {
+                id: 1,
+                title: "NIMHANS Convention Center",
+                category: "Events & Exhibitions",
+                description:
+                "A popular venue hosting conferences, academic events, medical summits, and public programs.",
+            },
+            {
+                id: 2,
+                title: "Forum Mall, Koramangala (Near Hosur Road)",
+                category: "Shopping & Entertainment",
+                description:
+                "One of Bengaluru’s oldest malls featuring PVR cinemas, retail stores, cafés, and dining spots.",
+            },
+            {
+                id: 3,
+                title: "Shivoham Shiva Temple",
+                category: "Spiritual",
+                description:
+                "A serene spiritual complex featuring a 65-foot tall Lord Shiva statue along with meditation and cultural areas.",
+            },
             ],
             restaurants: [
-                { id: 1, name: 'Street Eats', cuisine: 'Street Food', rating: 4.4 },
-                { id: 2, name: 'The Grill House', cuisine: 'Barbecue', rating: 4.6 },
-                { id: 3, name: 'Curry Central', cuisine: 'Indian', rating: 4.3 }
-            ]
+            {
+                id: 1,
+                name: "Barbeque Nation (Forum Mall)",
+                cuisine: "Buffet · Barbecue",
+                rating: 4.4,
+            },
+            {
+                id: 2,
+                name: "Empire Restaurant",
+                cuisine: "North Indian · Arabian · Non-Veg",
+                rating: 4.3,
+            },
+            {
+                id: 3,
+                name: "Meghana Foods",
+                cuisine: "Andhra · Biriyani",
+                rating: 4.5,
+            },
+            ],
         },
-        'double-road': {
-            name: 'Double Road',
-            description: 'A peaceful residential area with excellent local amenities',
+
+        // ---------------------------------------------
+        "double-road": {
+            name: "Double Road (Shanti Nagar)",
+            description:
+            "A lively area connecting Shanti Nagar Bus Station, Residency Road, and Wilson Garden with parks and local eateries.",
             attractions: [
-                { id: 1, title: 'Double Road Park', category: 'Parks', description: 'Beautiful park with jogging tracks' },
-                { id: 2, title: 'Health Center', category: 'Healthcare', description: 'Modern healthcare facility' },
-                { id: 3, title: 'Community Center', category: 'Entertainment', description: 'Social gathering space and events venue' }
+            {
+                id: 1,
+                title: "Shantinagar Bus Station",
+                category: "Transport Hub",
+                description:
+                "A major KSRTC bus terminal with excellent connectivity to many parts of Bengaluru and nearby towns.",
+            },
+            {
+                id: 2,
+                title: "Sri Lakshmi Narayana Temple",
+                category: "Temple",
+                description:
+                "A peaceful neighborhood temple known for its vibrant festivals and daily rituals.",
+            },
+            {
+                id: 3,
+                title: "Double Road Park",
+                category: "Park",
+                description:
+                "A compact urban green space popular for morning walks and relaxation.",
+            },
             ],
             restaurants: [
-                { id: 1, name: 'Home Kitchen', cuisine: 'Indian', rating: 4.4 },
-                { id: 2, name: 'Veggie Delight', cuisine: 'Vegetarian', rating: 4.2 },
-                { id: 3, name: 'Dessert Corner', cuisine: 'Desserts', rating: 4.5 }
-            ]
+            {
+                id: 1,
+                name: "Mavalli Tiffin Room (MTR) – Lalbagh Road",
+                cuisine: "South Indian · Vegetarian",
+                rating: 4.6,
+            },
+            {
+                id: 2,
+                name: "Hotel Ogara's",
+                cuisine: "Kerala · Non-Veg",
+                rating: 4.2,
+            },
+            {
+                id: 3,
+                name: "Vidyaarthi Bhavan Fast Food",
+                cuisine: "South Indian",
+                rating: 4.4,
+            },
+            ],
         },
-        'koramangala': {
-            name: 'Koramangala',
-            description: 'A trendy neighborhood with vibrant nightlife, cafes, and entertainment',
+
+        // ---------------------------------------------
+        koramangala: {
+            name: "Koramangala",
+            description:
+            "A top lifestyle destination in Bengaluru known for cafés, nightlife, high-end restaurants, and urban culture.",
             attractions: [
-                { id: 1, title: 'Street Art District', category: 'Entertainment', description: 'Colorful murals and street art' },
-                { id: 2, title: 'Koramangala Market', category: 'Shopping', description: 'Shopping hub with boutiques and stores' },
-                { id: 3, title: 'Nightlife Quarter', category: 'Entertainment', description: 'Bars, clubs, and lounges' }
+            {
+                id: 1,
+                title: "Forum Mall Koramangala",
+                category: "Shopping & Entertainment",
+                description:
+                "A popular urban mall featuring retail stores, restaurants, cafés, and cinemas.",
+            },
+            {
+                id: 2,
+                title: "Sree Krishna Temple 4th Block",
+                category: "Temple",
+                description:
+                "A peaceful place of worship popular with locals and known for its beautiful festivals.",
+            },
+            {
+                id: 3,
+                title: "Koramangala 80 Feet Road",
+                category: "Lifestyle",
+                description:
+                "One of the city's most happening stretches with cafés, lounges, boutiques, and co-working spaces.",
+            },
             ],
             restaurants: [
-                { id: 1, name: 'Trendy Lounge', cuisine: 'Multi-Cuisine', rating: 4.5 },
-                { id: 2, name: 'Fusion Bites', cuisine: 'Fusion', rating: 4.4 },
-                { id: 3, name: 'Coffee Culture', cuisine: 'Cafe', rating: 4.6 }
-            ]
+            {
+                id: 1,
+                name: "Truffles",
+                cuisine: "Burgers · Continental",
+                rating: 4.5,
+            },
+            {
+                id: 2,
+                name: "Gilly’s Restobar",
+                cuisine: "Casual Dining · Continental · Indian",
+                rating: 4.3,
+            },
+            {
+                id: 3,
+                name: "Hole in the Wall Cafe",
+                cuisine: "Breakfast · Café",
+                rating: 4.6,
+            },
+            ],
         },
-        'jayanagar': {
-            name: 'Jayanagar',
-            description: 'A peaceful locality known for its family-friendly atmosphere and local culture',
+
+        // ---------------------------------------------
+        jayanagar: {
+            name: "Jayanagar",
+            description:
+            "A peaceful, green residential area known for temples, parks, food joints, and shopping.",
             attractions: [
-                { id: 1, title: 'Jayanagar Park', category: 'Parks', description: 'Green space for recreation and relaxation' },
-                { id: 2, title: 'Shopping Street', category: 'Shopping', description: 'Traditional shopping area with local shops' },
-                { id: 3, title: 'Cultural Center', category: 'Entertainment', description: 'Events and cultural programs' }
+            {
+                id: 1,
+                title: "Jayanagar 4th Block Shopping Complex",
+                category: "Shopping",
+                description:
+                "A historic marketplace with local stores, bookstores, clothing outlets, and eateries.",
+            },
+            {
+                id: 2,
+                title: "MN Krishna Rao Park",
+                category: "Parks",
+                description:
+                "A large and peaceful park excellent for morning walks, sports, and family outings.",
+            },
+            {
+                id: 3,
+                title: "Ragigudda Anjaneya Temple",
+                category: "Temple",
+                description:
+                "A popular hilltop temple with scenic views and a calm devotional atmosphere.",
+            },
             ],
             restaurants: [
-                { id: 1, name: 'Traditional Kitchen', cuisine: 'South Indian', rating: 4.3 },
-                { id: 2, name: 'Family Diner', cuisine: 'Indian', rating: 4.2 },
-                { id: 3, name: 'Local Bakery', cuisine: 'Bakery', rating: 4.4 }
-            ]
+            {
+                id: 1,
+                name: "Taaza Thindi",
+                cuisine: "South Indian Fast Food",
+                rating: 4.6,
+            },
+            {
+                id: 2,
+                name: "Go Native",
+                cuisine: "Organic · Vegetarian",
+                rating: 4.4,
+            },
+            {
+                id: 3,
+                name: "Maiyas Restaurant",
+                cuisine: "South Indian · Vegetarian",
+                rating: 4.3,
+            },
+            ],
         },
-        'indiranagar': {
-            name: 'Indiranagar',
-            description: 'A vibrant hub with a mix of traditional and modern attractions',
+
+        // ---------------------------------------------
+        indiranagar: {
+            name: "Indiranagar",
+            description:
+            "A stylish, upbeat area known for upscale dining, nightlife, boutique shopping, and lush greenery.",
             attractions: [
-                { id: 1, title: '100 Feet Road', category: 'Shopping', description: 'Famous commercial street with shops and cafes' },
-                { id: 2, title: 'Indiranagar Lake', category: 'Parks', description: 'Scenic lake area perfect for leisure walks' },
-                { id: 3, title: 'Art Gallery District', category: 'Entertainment', description: 'Contemporary art galleries and studios' }
+            {
+                id: 1,
+                title: "100 Feet Road Shopping Street",
+                category: "Shopping",
+                description:
+                "A major high-street stretch featuring boutiques, cafes, stores, and nightlife spots.",
+            },
+            {
+                id: 2,
+                title: "Indiranagar Park",
+                category: "Parks",
+                description:
+                "A clean and well-maintained neighborhood park popular for jogging and fitness.",
+            },
+            {
+                id: 3,
+                title: "Monkey Bar Area (12th Main Road)",
+                category: "Nightlife",
+                description:
+                "A buzzing nightlife zone packed with pubs, lounges, and live-music venues.",
+            },
             ],
             restaurants: [
-                { id: 1, name: 'Artisan Plates', cuisine: 'Fusion', rating: 4.5 },
-                { id: 2, name: 'Spice Lane', cuisine: 'Indian', rating: 4.4 },
-                { id: 3, name: 'Brew Haven', cuisine: 'Cafe', rating: 4.6 }
-            ]
-        }
+            {
+                id: 1,
+                name: "Toit",
+                cuisine: "Brewpub · Continental",
+                rating: 4.6,
+            },
+            {
+                id: 2,
+                name: "Corner House",
+                cuisine: "Ice Cream · Desserts",
+                rating: 4.5,
+            },
+            {
+                id: 3,
+                name: "The Fatty Bao",
+                cuisine: "Asian · Japanese · Fusion",
+                rating: 4.4,
+            },
+            ],
+        },
     };
 
     const currentArea = areaData[area] || areaData['wilson-garden'];
