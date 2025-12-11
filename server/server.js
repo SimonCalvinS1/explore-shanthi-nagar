@@ -92,7 +92,7 @@ app.use('/api/transportation', transportationRoutes);
 app.use('/api/carousel', carouselRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/about', aboutRoutes);
-app.use("/api/explore", exploreAreaRoutes);
+app.use('/api/explore', exploreAreaRoutes);
 
 // Health & Debug Endpoints
 app.get('/api/health', (req, res) => {

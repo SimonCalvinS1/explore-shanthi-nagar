@@ -92,6 +92,11 @@ export const transportationAPI = {
     getById: (id) => fetchAPI(`/api/transportation/${id}`)
 };
 
+export const exploreAreaAPI = {
+    getAll: () => fetchAPI('/api/explore'),
+    getBySlug: (slug) => fetchAPI(`/api/explore/${slug}`),
+};
+
 // Fetch all recommendations at once
 export const getAllRecommendations = async () => {
     try {
@@ -109,7 +114,6 @@ export const getAllRecommendations = async () => {
             { id: 4, category: "Universities & Colleges", places: universities },
             { id: 5, category: "Travelling & Transport", places: transportation }
         ];
-
         return recommendations;
     } catch (error) {
         console.error('Error fetching all recommendations:', error);
