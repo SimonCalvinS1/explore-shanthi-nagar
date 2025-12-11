@@ -8,8 +8,4 @@ const parksAndRecreationSchema = new mongoose.Schema({
     image: { type: String, default: '' }
 }, { timestamps: true });
 
-parksAndRecreationSchema.index({ category: 1 });
-parksAndRecreationSchema.index({ name: 1 });
-parksAndRecreationSchema.index({ createdAt: -1 });
-
 export default mongoose.model('ParksAndRecreation', parksAndRecreationSchema, 'parks_and_recreation');

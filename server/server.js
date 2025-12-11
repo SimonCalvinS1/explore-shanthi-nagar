@@ -10,15 +10,15 @@ import morgan from 'morgan';
 import xss from 'xss';
 
 // Import all routes
-import foodAndDiningRoutes from '../routes/foodAndDining.js';
-import shoppingRoutes from '../routes/shopping.js';
-import parksRoutes from '../routes/parksAndRecreation.js';
-import universitiesRoutes from '../routes/universitiesAndColleges.js';
-import transportationRoutes from '../routes/transportation.js';
-import carouselRoutes from '../routes/carousel.js';
-import contactRoutes from "../routes/contactRoutes.js";
-import aboutRoutes from "../routes/aboutRoutes.js";
-import exploreAreaRoutes from "../routes/exploreAreaRoutes.js";
+import foodAndDiningRoutes from './routes/foodAndDining.js';
+import shoppingRoutes from './routes/shopping.js';
+import parksRoutes from './routes/parksAndRecreation.js';
+import universitiesRoutes from './routes/universitiesAndColleges.js';
+import transportationRoutes from './routes/transportation.js';
+import carouselRoutes from './routes/carousel.js';
+import contactRoutes from "./routes/contactRoutes.js";
+import aboutRoutes from "./routes/aboutRoutes.js";
+import exploreAreaRoutes from "./routes/exploreAreaRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -92,7 +92,7 @@ app.use('/api/transportation', transportationRoutes);
 app.use('/api/carousel', carouselRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/about', aboutRoutes);
-app.use('/api/explore', exploreAreaRoutes);
+app.use("/api/explore", exploreAreaRoutes);
 
 // Health & Debug Endpoints
 app.get('/api/health', (req, res) => {

@@ -8,8 +8,4 @@ const foodAndDiningSchema = new mongoose.Schema({
     image: { type: String, default: '' }
 }, { timestamps: true });
 
-foodAndDiningSchema.index({ category: 1 });
-foodAndDiningSchema.index({ name: 1 });
-foodAndDiningSchema.index({ createdAt: -1 });
-
 export default mongoose.model('FoodAndDining', foodAndDiningSchema, 'food_and_dining');
