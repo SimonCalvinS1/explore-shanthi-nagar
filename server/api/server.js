@@ -20,8 +20,6 @@ import contactRoutes from "../routes/contactRoutes.js";
 import aboutRoutes from "../routes/aboutRoutes.js";
 import exploreAreaRoutes from "../routes/exploreAreaRoutes.js";
 
-import { connectDB } from "../db/connect.js";
-
 dotenv.config();
 const app = express();
 
@@ -74,11 +72,6 @@ app.use('/api', limiter);
 // Debug log for incoming requests
 app.use((req, res, next) => {
     console.log(`➡️ ${req.method} ${req.originalUrl}`);
-    next();
-});
-
-app.use(async (req, res, next) => {
-    await connectDB();
     next();
 });
 
