@@ -8,4 +8,8 @@ const transportationSchema = new mongoose.Schema({
     image: { type: String, default: '' }
 }, { timestamps: true });
 
+transportationSchema.index({ category: 1 });
+transportationSchema.index({ name: 1 });
+transportationSchema.index({ createdAt: -1 });
+
 export default mongoose.model('Transportation', transportationSchema, 'transportation');

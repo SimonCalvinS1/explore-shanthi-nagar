@@ -33,4 +33,8 @@ const contactSchema = new mongoose.Schema(
   }
 );
 
+contactSchema.index({ category: 1 });
+contactSchema.index({ name: 1 });
+contactSchema.index({ createdAt: -1 });
+
 export default mongoose.model("Contact", contactSchema);

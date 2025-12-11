@@ -8,4 +8,8 @@ const universitiesAndCollegesSchema = new mongoose.Schema({
     image: { type: String, default: '' }
 }, { timestamps: true });
 
+universitiesAndCollegesSchema.index({ category: 1 });
+universitiesAndCollegesSchema.index({ name: 1 });
+universitiesAndCollegesSchema.index({ createdAt: -1 });
+
 export default mongoose.model('UniversitiesAndColleges', universitiesAndCollegesSchema, 'universities_and_colleges');

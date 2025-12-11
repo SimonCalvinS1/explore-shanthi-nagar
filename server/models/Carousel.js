@@ -7,4 +7,8 @@ const carouselSchema = new mongoose.Schema({
     link: { type: String, default: '' } // optional redirect link
 }, { timestamps: true });
 
+carouselSchema.index({ category: 1 });
+carouselSchema.index({ name: 1 });
+carouselSchema.index({ createdAt: -1 });
+
 export default mongoose.model('Carousel', carouselSchema, 'carousel');
