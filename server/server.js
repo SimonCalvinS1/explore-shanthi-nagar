@@ -1,4 +1,4 @@
-// ===== server/server.js =====
+// server/server.js
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -16,7 +16,6 @@ import transportationRoutes from './routes/transportation.js';
 import carouselRoutes from './routes/carousel.js';
 import contactRoutes from "./routes/contactRoutes.js";
 import aboutRoutes from "./routes/aboutRoutes.js";
-import exploreAreaRoutes from "./routes/exploreAreaRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -30,29 +29,23 @@ app.set('trust proxy', 1);
 
 app.use(
   helmet({
-    crossOriginResourcePolicy: false,
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        connectSrc: [
-          "'self'",
-          "https://*.vercel.app",
-          "https://*.mongodb.com"
-        ],
-        imgSrc: ["'self'", "data:", "https:"],
-        scriptSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'"]
-      }
-    }
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    contentSecurityPolicy: false
   })
 );
 
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  next();
+});
+
 app.use(cors({
   origin: [
+    "http://localhost:5173",
     process.env.CORS_ORIGIN
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  credentials: false
 }));
 
 app.use(express.json({ limit: '20kb' }));
@@ -69,9 +62,8 @@ app.use('/api', limiter);
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('~ MongoDB connected'))
-  .catch(err => console.error('MongoDB error:', err));
+  .catch(err => console.error('MongoDB error'));
 
-/* -------------------- ROUTES -------------------- */
 app.use('/api/food', foodAndDiningRoutes);
 app.use('/api/shopping', shoppingRoutes);
 app.use('/api/parks', parksRoutes);
@@ -92,5 +84,11 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

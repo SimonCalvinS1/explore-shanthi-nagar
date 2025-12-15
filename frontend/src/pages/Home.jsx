@@ -67,17 +67,17 @@ const Home = () => {
 
             console.log('Fetching carousel data...');
             const data = await carouselAPI.getAll();
-            console.log('Carousel data received:', data);
+            console.log('~ Carousel data received');
 
             setCarouselItems(data);
         } catch (error) {
-            console.error('Error fetching carousel data:', error);
+            console.error('Error fetching carousel data');
             
             // Better error messaging
             if (error.response?.status === 429) {
                 setError("Too many requests. Please wait a moment.");
             } else {
-                setError(error.message || "Failed to load carousel");
+                setError("Failed to load carousel");
             }
         } finally {
             setLoading(false);

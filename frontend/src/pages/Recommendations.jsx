@@ -53,17 +53,17 @@ const Recommendations = () => {
 
       console.log('rs: Fetching recommendations...');
       const data = await getAllRecommendations();
-      console.log(' ~ Data received:', data);
+      console.log(' ~ Places data received');
 
       setRecommendations(data);
     } catch (err) {
-      console.error(" >< Error loading recommendations:", err.message);
+      console.error("Error loading recommendations");
 
       // Better error messaging
       if (err.response?.status === 429) {
         setError("Too many requests. Please wait a moment and try again.");
       } else {
-        setError(err.message || "Failed to fetch recommendations");
+        setError("Failed to fetch recommendations");
       }
     } finally {
       setLoading(false);

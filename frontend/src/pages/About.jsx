@@ -12,7 +12,7 @@ export default function About() {
         const data = await aboutAPI.getAll();
         setImages(data);
       } catch (err) {
-        setError(err.message);
+        setError("Failed to load about information");
       } finally {
         setLoading(false);
       }
