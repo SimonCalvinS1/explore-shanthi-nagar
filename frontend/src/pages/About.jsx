@@ -12,7 +12,6 @@ export default function About() {
         const data = await aboutAPI.getAll();
         setImages(data);
       } catch (err) {
-        console.error("Error fetching about images:", err);
         setError(err.message);
       } finally {
         setLoading(false);

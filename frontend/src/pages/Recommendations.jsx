@@ -57,7 +57,7 @@ const Recommendations = () => {
 
       setRecommendations(data);
     } catch (err) {
-      console.error(" >< Error loading recommendations:", err);
+      console.error(" >< Error loading recommendations:", err.message);
 
       // Better error messaging
       if (err.response?.status === 429) {
@@ -104,7 +104,7 @@ const Recommendations = () => {
       <div className="w-full py-20">
         <div className="max-w-md mx-auto bg-red-50 border border-red-200 rounded-lg p-6 text-center">
           <p className="text-red-700 text-lg font-semibold mb-2">⚠️ Error Loading Data</p>
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-red-600 mb-4">{error.message}</p>
           <button
             onClick={fetchRecommendations}
             className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"

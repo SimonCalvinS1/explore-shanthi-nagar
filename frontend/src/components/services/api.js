@@ -92,11 +92,6 @@ export const transportationAPI = {
     getById: (id) => fetchAPI(`/api/transportation/${id}`)
 };
 
-export const exploreAreaAPI = {
-    getAll: () => fetchAPI('/api/explore'),
-    getBySlug: (slug) => fetchAPI(`/api/explore/${slug}`),
-};
-
 // Fetch all recommendations at once
 export const getAllRecommendations = async () => {
     try {

@@ -20,8 +20,7 @@ const Contact = () => {
                 setStatus(" ~ Failed to send message. Please try again.");
             }
         } catch (error) {
-            console.error(error);
-            setStatus(" Some error occured. Please try later.");
+            setStatus(" Some error occured. Please try later.", error.message);
         }
     };
 
