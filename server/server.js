@@ -45,7 +45,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        connectSrc: ["'self'", "https://explore-shanthi-nagar.vercel.app"],
+        connectSrc: ["'self'", process.env.CORS_ORIGIN],
         imgSrc: ["'self'", "data:", "https:"],
         scriptSrc: ["'self'"],
         styleSrc: ["'self'", "'unsafe-inline'"]
