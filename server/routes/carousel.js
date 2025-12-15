@@ -13,20 +13,4 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Add a new carousel item (with image URL)
-router.post('/', async (req, res) => {
-  try {
-    const item = new Carousel({
-      title: req.body.title,
-      description: req.body.description,
-      image: req.body.image, // must be a valid URL
-      link: req.body.link || ''
-    });
-    await item.save();
-    res.status(201).json(item);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
 export default router;

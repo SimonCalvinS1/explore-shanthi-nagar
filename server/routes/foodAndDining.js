@@ -13,16 +13,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    try {
-        const item = new FoodAndDining(req.body);
-        await item.save();
-        res.status(201).json(item);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
-
 router.get('/:id', async (req, res) => {
     try {
         const item = await FoodAndDining.findById(req.params.id);

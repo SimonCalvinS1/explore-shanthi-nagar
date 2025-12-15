@@ -1,35 +1,28 @@
 import express from "express";
 import { body, validationResult } from "express-validator";
 import rateLimit from "express-rate-limit";
-import xss from "xss";
 import Contact from "../models/Contact.js";
 
 const router = express.Router();
 
-// Rate limiter: 5 requests per minute per IP
 const contactLimiter = rateLimit({
   windowMs: 60 * 1000,
   max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
   message: {
     success: false,
     message: "Too many requests. Please try again later."
   }
 });
 
-// POST route — Secure Contact Form
 router.post(
   "/",
   contactLimiter,
   [
-    body("name")
-      .trim()
-      .isLength({ min: 1 })
-      .withMessage("Name must be at least 1 character long"),
-    body("email").isEmail().withMessage("Please enter a valid email"),
-    body("message")
-      .trim()
-      .isLength({ min: 1 })
-      .withMessage("Message must be at least 1 character long")
+    body("name").trim().escape().isLength({ min: 1 }),
+    body("email").isEmail().normalizeEmail(),
+    body("message").trim().escape().isLength({ min: 1 })
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -42,18 +35,16 @@ router.post(
 
     try {
       const { name, email, message } = req.body;
-      const contact = new Contact({ name, email, message });
-      await contact.save();
-      console.log("Contact request body:", req.body);
+      await Contact.create({ name, email, message });
       res.status(201).json({
         success: true,
-        message: " ~ Message sent successfully"
+        message: "Message sent successfully"
       });
     } catch (error) {
-      console.error(">>> Contact form error:", error);
+      console.error("Contact error:", error);
       res.status(500).json({
         success: false,
-        message: "Server error while sending message"
+        message: "Server error"
       });
     }
   }
