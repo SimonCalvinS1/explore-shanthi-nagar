@@ -40,7 +40,19 @@ app.use((req, res, next) => {
 });
 
 // Set secure HTTP headers
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        connectSrc: ["'self'", "https://explore-shanthi-nagar.vercel.app"],
+        imgSrc: ["'self'", "data:", "https:"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"]
+      }
+    }
+  })
+);
 
 // Enable CORS with origin restriction
 app.use(cors({
