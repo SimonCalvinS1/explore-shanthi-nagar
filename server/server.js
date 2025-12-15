@@ -21,11 +21,29 @@ import exploreAreaRoutes from "./routes/exploreAreaRoutes.js";
 dotenv.config();
 const app = express();
 
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  next();
+});
+
 app.set('trust proxy', 1);
 
 app.use(
   helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" }
+    crossOriginResourcePolicy: false,
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        connectSrc: [
+          "'self'",
+          "https://*.vercel.app",
+          "https://*.mongodb.com"
+        ],
+        imgSrc: ["'self'", "data:", "https:"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"]
+      }
+    }
   })
 );
 
@@ -62,7 +80,6 @@ app.use('/api/transportation', transportationRoutes);
 app.use('/api/carousel', carouselRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/about', aboutRoutes);
-app.use('/api/explore', exploreAreaRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({
