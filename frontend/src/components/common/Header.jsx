@@ -33,7 +33,6 @@ function Header() {
                     <Link to="/" className={navLinkHover}>Home</Link>
                     <Link to="/about" className={navLinkHover}>About</Link>
                     <Link to="/contact" className={navLinkHover}>Contact</Link>
-                    <Link to="/explore" className={navLinkHover}>Explore</Link>
                     <Link to="/places-to-visit" className={navLinkHover}>Places to Visit</Link>
                 </nav>
 
@@ -44,7 +43,6 @@ function Header() {
                             <Link to="/" className={mobileNav} onClick={() => setIsMenuOpen(false)}>Home</Link>
                             <Link to="/about" className={mobileNav} onClick={() => setIsMenuOpen(false)}>About</Link>
                             <Link to="/contact" className={mobileNav} onClick={() => setIsMenuOpen(false)}>Contact</Link>
-                            <Link to="/explore" className={mobileNav} onClick={() => setIsMenuOpen(false)}>Explore</Link>
                             <Link to="/places-to-visit" className={mobileNav} onClick={() => setIsMenuOpen(false)}>Places to Visit</Link>
                         </div>
                     </nav>

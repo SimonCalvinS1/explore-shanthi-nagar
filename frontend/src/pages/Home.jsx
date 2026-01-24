@@ -182,28 +182,6 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {/* Neighborhoods Section */}
-            <div className="w-full bg-gray-50 py-16 px-4">
-                <div className="w-full max-w-7xl mx-auto">
-                    <h2 className="text-2xl font-semibold mb-12 text-center">Explore Nearby Neighborhoods</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {['Wilson Garden', 'Hosur Road', 'Double Road', 'Koramangala', 'Jayanagar', 'Indiranagar'].map((area, idx) => (
-                            <div key={idx} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                                <h3 className="text-lg font-semibold mb-2 text-blue-900">{area}</h3>
-                                <p className="text-gray-600 mb-4">Discover the best attractions, restaurants, and experiences in {area}.</p>
-                                <Link to={`/explore/${area.toLowerCase().replace(/\s+/g, '-')}`} className="text-blue-600 font-semibold hover:underline">
-                                    Explore →
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            {/* Categories Section */}
-            <div className="w-full py-16 px-4">
                 <div className="w-full max-w-7xl mx-auto">
                     <h2 className="text-2xl font-semibold mb-12 text-center">What Are You Looking For?</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
